@@ -35,4 +35,12 @@ router.get('/profile', authController.isLoggedIn, (req, res) => {
     }
 })
 
+router.get('/book', authController.isLoggedIn, (req, res) => {
+    if (req.user) {
+        res.render('book')
+    } else {
+        res.render('login')
+    }
+})
+
 module.exports = router;

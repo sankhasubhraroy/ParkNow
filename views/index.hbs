@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="./style.css">
     <title>Welcome</title>
 </head>
 
@@ -47,16 +47,58 @@
             </div>
         </div>
     </nav>
-    <div class="container mt-4">
-        <div class="jumbotron">
-            <h1 class="display-4">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
-                to featured content or information.</p>
-            <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Find the Perfect Parking Spot</h1>
+                <p>Book a parking spot in advance and save time and money!</p>
+                <a href="/book" class="cta">Book Now</a>
+            </div>
+        </section>
+        <section class="features">
+            <div class="container">
+                <h2>Why Choose Park Now?</h2>
+                <div class="feature-box">
+                    <i class="fa fa-car"></i>
+                    <h3>Convenient</h3>
+                    <p>Book your parking spot in advance and save time.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fa fa-lock"></i>
+                    <h3>Secure</h3>
+                    <p>Our parking lots are equipped with advanced security features.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fa fa-dollar"></i>
+                    <h3>Affordable</h3>
+                    <p>Get the best parking rates with Park Now.</p>
+                </div>
+            </div>
+        </section>
+        <section class="testimonials">
+            <div class="container">
+                <h2>What Our Customers Say</h2>
+                <div class="testimonial-box">
+                    <p>"I've been using Park Now for years and I'm always impressed with their service. Highly
+                        recommended!"</p>
+                    <h3>John Doe</h3>
+                </div>
+                <div class="testimonial-box">
+                    <p>"Booking a parking spot with Park Now is so easy and convenient. I never have to worry about
+                        finding a spot."</p>
+                    <h3>Jane Smith</h3>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Park Now. All rights reserved.</p>
         </div>
-    </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>

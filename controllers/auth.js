@@ -2,6 +2,7 @@ const mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
+const { request } = require("http");
 
 const db = mysql.createConnection({
     host: process.env.HOST,
@@ -22,14 +23,14 @@ exports.login = async (req, res) => {
     }
     else {
         db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
-            console.log(results);
+
             console.log(results[0]);
 
             if (err) {
                 console.log(err);
             }
 
-            else if (!results || !await bcrypt.compare(password, results[0].password)) {
+            else if (!results[0] || !await bcrypt.compare(password, results[0].password)) {
                 return res.status(401).render('login', {
                     message: 'Email or Password is incorrect'
                 })
@@ -68,7 +69,8 @@ exports.register = (req, res) => {
     else {
 
         db.query('SELECT email from users WHERE email = ?', [email], async (err, results) => {
-
+            // console.log(results)
+            // console.log(results[0])
             if (err) {
                 console.log(err);
             }
@@ -91,7 +93,6 @@ exports.register = (req, res) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log(results);
                     return res.render("register", {
                         message: 'User registered'
                     });
@@ -115,7 +116,7 @@ exports.isLoggedIn = async (req, res, next) => {
 
             // 2. Check if the user still exist
             db.query('SELECT * FROM users WHERE id = ?', [decoded.id], (err, results) => {
-                console.log(results);
+                // console.log(results);
                 if (!results) {
                     return next();
                 }
@@ -132,10 +133,52 @@ exports.isLoggedIn = async (req, res, next) => {
 }
 
 
-exports.logout = (req, res) => {
-    res.cookie('userSave', 'logout', {
-        expires: new Date(Date.now() + 2 * 1000),
-        httpOnly: true
-    });
+exports.logout = async (req, res) => {
+    res.clearCookie('userSave');
     res.status(200).redirect("/");
+}
+
+
+exports.book = async (req, res) => {
+    // console.log(req.body);
+    const { vehicleType, vehicleNo, date, time, duration } = req.body;
+
+    if (req.cookies.userSave) {
+        // 1. Verify the token
+        const decoded = await promisify(jwt.verify)(req.cookies.userSave,
+            process.env.JWT_SECRET
+        );
+        // console.log(decoded);
+
+
+        db.query('SELECT * FROM users WHERE id = ?', [decoded.id], (err, result) => {
+            // console.log(result);
+            // console.log(result[0]);
+
+            const id = result[0].id;
+            const name = result[0].name;
+            const email = result[0].email;
+
+            if (err) {
+                console.log(err);
+            }
+            else if (!vehicleType || !vehicleNo || !date || !time || !duration) {
+                return res.render('book', {
+                    message: 'Fill all the details, Please'
+                });
+            } else {
+                db.query('INSERT INTO bookings SET ?', { name: name, email: email, vehicle_type: vehicleType, vehicle_no: vehicleNo, date: date, time: time, duration: duration, id: id }, (err, result) => {
+
+                    if (err) {
+                        console.log(err);
+                    }
+                    else {
+                        return res.render('book', {
+                            message: 'Ordered Successfully'
+                        });
+                    }
+                });
+            }
+        });
+    }
 }

@@ -1,9 +1,282 @@
-.avatar-ctn {
-    background-color: orange;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #ff9933;
+}
+
+.hero {
+    background-image: url("https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero h1 {
+    font-size: 48px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.cta {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: #ff9933;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.cta:hover {
+    background-color: #ff8c1a;
+}
+
+.features {
+    padding: 80px 0;
+}
+
+.features h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.feature-box {
+    background-color: #fff;
+    padding: 40px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.feature-box i {
+    font-size: 48px;
+    color: #ff9933;
+    margin-bottom: 20px;
+}
+
+.feature-box h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.feature-box p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+.testimonials {
+    background-color: #f9f9f9;
+    padding: 80px 0;
+}
+
+.testimonials h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.testimonial-box {
+    background-color: #fff;
+    padding: 40px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.testimonial-box p {
+    font-size: 24px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.testimonial-box h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 20px;
     text-align: center;
 }
 
-.avatar {
-    width: 65%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+.footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.social-media a {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.social-media i {
+    font-size: 24px;
+    color: #fff;
+    transition: color 0.2s;
+}
+
+.social-media i:hover {
+    color: #ff9933;
+}
+
+.footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-links li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #ff9933;
+}
+
+/* Responsive styles */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav li {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .hero {
+        height: auto;
+        padding: 80px 0;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+
+    .hero p {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .cta {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .features {
+        padding: 40px 0;
+    }
+
+    .feature-box {
+        margin-bottom: 40px;
+    }
+
+    .testimonials {
+        padding: 40px 0;
+    }
+
+    .testimonial-box {
+        margin-bottom: 40px;
+    }
 }

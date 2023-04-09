@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Marcellus', serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background: #eeeaeb;
+}
+
+.main-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-body {
+    background: #fff;
+    border: 1px solid #33333326;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+}
+
+.login-text {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.input-container span {
+    display: block;
+}
+
+.form-input {
+    height: 50px;
+    width: 100%;
+    padding-left: 50px;
+    font-family: 'Marcellus', serif;
+    font-weight: bold;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 2px solid lightgray;
+}
+
+.animated-symbol {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    margin-top: -50px;
+    padding-top: 12px;
+    box-sizing: border-box;
+    /* border: 2px solid black; */
+    color: lightgray;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+}
+
+.form-input::placeholder {
+    color: lightgray;
+}
+
+.form-input:focus {
+    outline: none;
+}
+
+.form-input:focus+.animated-symbol {
+    color: #5350eec4;
+    transition: all;
+    transition-duration: 0.7s;
+}
+
+.bottom-border {
+    position: relative;
+    display: inline-block;
+    width: 0px;
+    height: 2px;
+    background: #5350eec4;
+    top: -2px;
+    -webkit-transition: all ease-in-out .15s;
+    -o-transition: all ease-in-out .15s;
+    transition: all ease-in-out .15s;
+}
+
+.form-input:focus~.bottom-border {
+    width: 100%;
+    transition: all;
+    transition-duration: 0.7s;
+}
+
+.forget-password-container {
+    text-align: end;
+    margin-top: 4%;
+}
+
+.submit-button {
+    display: block;
+    width: fit-content;
+    margin: auto;
+    margin-top: 10%;
+    padding: 10px 30px;
+    background-color: #dc8b3b;
+    font-family: 'Marcellus', serif;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    transition: background-color .5s;
+}
+
+.submit-button:hover {
+    cursor: pointer;
+    background-color: #e2c72b;
+    color: #0e0000;
+    transition: .5s;
+}
+
+.signup-redirect {
+    text-align: center;
+    margin-top: 10%;
+}
+
+.social-media {
+    text-align: center;
+    margin-top: 5%;
+}
+
+.social-media a {
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+.social-media a i {
+    width: 10%;
+    transition: .3s;
+}
+
+.social-media a i:hover {
+    color: #dc8b3b;
+    transition: .3s;
+}

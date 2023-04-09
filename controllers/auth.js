@@ -182,3 +182,24 @@ exports.book = async (req, res) => {
         });
     }
 }
+
+
+exports.profile = async (req, res, next) => {
+
+    if (req.cookies.userSave) {
+        // 1. Verify the token
+        const decoded = await promisify(jwt.verify)(req.cookies.userSave,
+            process.env.JWT_SECRET
+        );
+
+        db.query('SELECT * FROM bookings WHERE id = ?', [decoded.id], (err, result) => {
+
+            // console.log(result);
+            // let record = result.length;
+            req.bookings = result;
+            return next();
+
+
+        })
+    }
+}

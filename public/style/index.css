@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,22 +9,83 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
+    font-family: 'Marcellus', serif;
     font-size: 16px;
     line-height: 1.5;
     color: #333;
     background-color: #f9f9f9;
 }
 
-header {
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
+.navbar-brand-text {
+    font-family: 'Barriecito', cursive;
+    color: #c27324;
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
+    margin-right: 1rem;
+    margin-left: 2rem;
+    font-size: 1.25rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 1s;
+}
+
+.navbar-brand-text:hover {
+    transition: 1s;
+    color: #e2c72b;
+    /* text-shadow: 0px 0px 20px rgba(255, 255, 0, 0.655); */
+}
+
+.rout-container {
+    text-align: center;
+}
+
+.nav-alternate-item {
+    font-family: 'Marcellus', serif;
+    /* background-color: #333; */
+    border: 2px solid #333333ab;
+    border-radius: 3px;
+    padding: 3px;
+    margin: 3px;
+    margin-right: 10px;
+    margin-left: 10px;
+    transition: background-color .5s;
+
+}
+
+.nav-alternate-item:hover {
+    background-color: #333333ab;
+    transition: .5s;
+}
+
+
+.profile-logo {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgb(48, 203, 27);
+    border-radius: 30px;
+    transition: 0.4s;
+}
+
+.profile-logo:hover {
+    border: 3px solid rgb(203, 194, 27);
+    border-radius: 30px;
+    transition: 0.4s;
+}
+
+.navbar-container {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.profile-container {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.nav-link {
+    padding: 0px;
 }
 
 .container {
@@ -29,35 +94,8 @@ header {
     padding: 0 20px;
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    text-decoration: none;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-}
-
-nav li {
-    margin-right: 20px;
-}
-
-nav a {
-    color: #333;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-nav a:hover {
-    color: #ff9933;
-}
-
-.hero {
-    background-image: url("https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
+.highlight {
+    background-image: url("https://images.unsplash.com/photo-1573348722427-f1d6819fdf98");
     background-size: cover;
     background-position: center;
     height: 600px;
@@ -66,34 +104,40 @@ nav a:hover {
     justify-content: center;
 }
 
-.hero h1 {
+.highlight h1 {
+    font-family: 'Rowdies', cursive;
     font-size: 48px;
     color: #fff;
+    text-shadow: -20px 20px 5px#f9f9f918;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.hero p {
+.highlight p {
     font-size: 24px;
-    color: #fff;
+    color: #ffffffe9;
     text-align: center;
     margin-bottom: 40px;
 }
 
-.cta {
-    display: inline-block;
+.book-button {
+    display: block;
+    width: fit-content;
+    margin: auto;
     padding: 15px 40px;
-    background-color: #ff9933;
-    color: #fff;
+    background-color: #dc8b3b;
+    color: #ffffff;
     font-size: 20px;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 30px;
     text-decoration: none;
-    transition: background-color 0.2s;
+    transition: background-color 1s;
 }
 
-.cta:hover {
-    background-color: #ff8c1a;
+.book-button:hover {
+    background-color: #e2c72b;
+    color: #0e0000;
+    transition: .5s;
 }
 
 .features {
@@ -101,6 +145,7 @@ nav a:hover {
 }
 
 .features h2 {
+    font-family: 'Rowdies', cursive;
     font-size: 36px;
     font-weight: bold;
     color: #333;
@@ -115,6 +160,11 @@ nav a:hover {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+}
+
+.feature-box:hover {
+    transform: scale(1.05);
+    transition-duration: 0.5s;
 }
 
 .feature-box i {
@@ -142,6 +192,7 @@ nav a:hover {
 }
 
 .testimonials h2 {
+    font-family: 'Rowdies', cursive;
     font-size: 36px;
     font-weight: bold;
     color: #333;
@@ -156,6 +207,11 @@ nav a:hover {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+}
+
+.testimonial-box:hover {
+    transform: scale(1.05);
+    transition-duration: 0.5s;
 }
 
 .testimonial-box p {
@@ -190,6 +246,7 @@ footer {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .social-media a {
@@ -200,7 +257,7 @@ footer {
 .social-media i {
     font-size: 24px;
     color: #fff;
-    transition: color 0.2s;
+    transition: color 0.3s;
 }
 
 .social-media i:hover {
@@ -244,17 +301,17 @@ footer {
         margin-bottom: 10px;
     }
 
-    .hero {
+    .highlight {
         height: auto;
         padding: 80px 0;
     }
 
-    .hero h1 {
+    .highlight h1 {
         font-size: 36px;
         margin-bottom: 10px;
     }
 
-    .hero p {
+    .highlight p {
         font-size: 18px;
         margin-bottom: 30px;
     }

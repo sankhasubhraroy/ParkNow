@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* font-family: 'Marcellus', serif; */
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.navbar-brand-text {
+    font-family: 'Barriecito', cursive;
+    color: #c27324;
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
+    margin-right: 1rem;
+    margin-left: 2rem;
+    font-size: 1.25rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 1s;
+}
+
+.navbar-brand-text:hover {
+    transition: 1s;
+    color: #e2c72b;
+    /* text-shadow: 0px 0px 20px rgba(255, 255, 0, 0.655); */
+}
+
+.rout-container {
+    text-align: center;
+}
+
+.nav-alternate-item {
+    font-family: 'Marcellus', serif;
+    /* background-color: #333; */
+    border: 2px solid #333333ab;
+    border-radius: 3px;
+    padding: 3px;
+    margin: 3px;
+    margin-right: 10px;
+    margin-left: 10px;
+    transition: background-color .5s;
+
+}
+
+.nav-alternate-item:hover {
+    background-color: #333333ab;
+    transition: .5s;
+}
+
+
+.profile-logo {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgb(48, 203, 27);
+    border-radius: 30px;
+    transition: 0.4s;
+}
+
+.profile-logo:hover {
+    border: 3px solid rgb(203, 194, 27);
+    border-radius: 30px;
+    transition: 0.4s;
+}
+
+.navbar-container {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.profile-container {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.nav-link {
+    padding: 0px;
+}
+
+.avatar-ctn {
+    background-color: orange;
+    text-align: center;
+}
+
+.avatar {
+    width: 65%;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.125); */
+}
+
+.main-container {
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.avatar-container {
+    width: 20%;
+    /* display: flex; */
+}
+
+.holder-container {
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.bookings-container {
+    margin-top: 5%;
+}

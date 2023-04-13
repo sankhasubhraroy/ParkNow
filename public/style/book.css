@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Marcellus', serif;
+    background-color: #333;
+    color: #ffffffdc;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.back-btn {
+    position: absolute;
+}
+
+.back-btn a {
+    color: #ffffff5f;
+}
+
+.back-btn a i {
+    padding: 10px 15px;
+    border-radius: 50%;
+    background-color: #ffffff44;
+}
+
+.parking-spot-booking {
+    width: 100%;
+    padding: 50px;
+    background: url("https://images.unsplash.com/photo-1579372778680-604834b02240");
+    background-size: cover;
+}
+
+.booking-container {
+    width: fit-content;
+    margin: auto;
+    background: #2d343b;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.booking-container h2 {
+    background-color: #1a1f24;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 50px;
+}
+
+.info-container {
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 20px 50px 0px;
+}
+
+.booking-form {
+    padding: 50px;
+}
+
+.radio-input {
+    display: inline-block;
+    margin-right: 30px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.radio-input input[type="radio"] {
+    height: 20px;
+    width: 20px;
+    accent-color: yellow;
+}
+
+.form-field {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.form-control {
+    height: 50px;
+    width: 100%;
+    display: block;
+    background-color: #1a1f24;
+    /* color: transparent; */
+    padding: 0px 20px;
+    font-size: 18px;
+    border: 1px solid #2d343b;
+    color: #ffffff77;
+    font-family: 'Marcellus', serif;
+    font-size: larger;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.form-control:focus {
+    outline: none;
+}
+
+.form-btn {
+    background-color: #f7c411;
+    color: #1a1f24;
+    height: 50px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 18px;
+    border: 1px solid #1a1f24;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.form-btn:hover {
+    background-color: #ffd900a9;
+}
+
+.alert {
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    padding: 10px;
+    background-color: #f44336cc;
+    color: white;
+}
+
+/* The close button */
+.closebtn {
+    padding: 5px;
+    margin-left: 10px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Responsive design for smaller screens */
+
+@media (max-width: 1023px) {
+    .back-btn a i {
+        border-radius: 0;
+        background-color: #ffffff19;
+    }
+
+    .booking-container {
+        width: auto;
+    }
+
+    .alert {
+        left: 20%;
+        right: 20%;
+    }
+}

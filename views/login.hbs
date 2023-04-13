@@ -18,62 +18,70 @@
 
     <div class="main-container">
 
-        <div class="login-body">
+        <div class="login-wrapper">
 
-            <form class="login-form" action="/auth/login" method="POST">
+            <div class="login-body">
 
-                <h4 class="login-text">Login</h4>
+                <form class="login-form" action="/auth/login" method="POST">
 
-                <div class="input-container">
-                    <label for="email" class="form-label-text">Email address</label>
-                    <input type="email" class="form-input" id="email" name="email" placeholder="Type your email id">
-                    <span class="animated-symbol">
-                        <i class="fa fa-envelope"></i>
-                    </span>
-                    <span class="bottom-border"></span>
+                    <h4 class="login-text">Login</h4>
+
+                    <div class="input-container">
+                        <label for="email" class="form-label-text">Email address</label>
+                        <input type="email" class="form-input" id="email" name="email" placeholder="Type your email id">
+                        <span class="animated-symbol">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                        <span class="bottom-border"></span>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="password" class="form-label-text">Password</label>
+                        <input type="password" class="form-input" id="password" name="password"
+                            placeholder="Type your password">
+                        <span class="animated-symbol">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        <span class="bottom-border"></span>
+                    </div>
+
+                    <div class="forget-password-container">
+                        <a href="#">Forget password?</a>
+                    </div>
+
+                    <button type="submit" class="submit-button">Login</button>
+                </form>
+
+                <div class="signup-redirect">
+                    <p>Don't have an account? <a href="/register">register</a> here</p>
                 </div>
 
-                <div class="input-container">
-                    <label for="password" class="form-label-text">Password</label>
-                    <input type="password" class="form-input" id="password" name="password"
-                        placeholder="Type your password">
-                    <span class="animated-symbol">
-                        <i class="fa fa-lock"></i>
-                    </span>
-                    <span class="bottom-border"></span>
+                <div class="social-media">
+
+                    <p>or Register Using</p>
+                    <a href="#"><i class="fa fa-facebook"></i></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
                 </div>
-
-                <div class="forget-password-container">
-                    <a href="#">Forget password?</a>
-                </div>
-
-                <button type="submit" class="submit-button">Login</button>
-            </form>
-
-            <div class="signup-redirect">
-                <p>Don't have an account? <a href="/register">register</a> here</p>
             </div>
 
-            <div class="social-media">
-
-                <p>or Register Using</p>
-                <a href="#"><i class="fa fa-facebook"></i></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-instagram"></i></a>
+            {{#if message}}
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+                {{message}}
             </div>
+            {{/if}}
         </div>
-
-        {{#if message}}
-        <h4 class="alert alert-danger">{{message}}</h4>
-        {{/if}}
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-            //if (message) {
-            //    document.querySelector(".container").innerHTML += `<h4 class="alert alert-danger mt-4">${message}<//h4>`
-            //}
-        </script>
+    <script>
+        const closeButton = document.querySelector('.closebtn');
+        const alertDiv = closeButton.parentElement;
+
+        setTimeout(() => {
+            alertDiv.style.display = 'none'
+        }, 6000)
+    </script>
 </body>
 
 </html>

@@ -17,14 +17,25 @@ body {
 }
 
 .main-container {
-    height: 100vh;
+    width: 100%;
+}
+
+.login-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    padding: 15px;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .login-body {
+    overflow: hidden;
     background: #fff;
     border: 1px solid #33333326;
     border-radius: 20px;
@@ -139,7 +150,7 @@ body {
 
 .social-media {
     text-align: center;
-    margin-top: 5%;
+    /* margin-top: 5%; */
 }
 
 .social-media a {
@@ -155,4 +166,32 @@ body {
 .social-media a i:hover {
     color: #dc8b3b;
     transition: .3s;
+}
+
+/* The alert message box */
+.alert {
+    position: absolute;
+    bottom: 15px;
+    padding: 10px;
+    background-color: #f44336cc;
+    color: white;
+}
+
+/* The close button */
+.closebtn {
+    padding: 5px;
+    margin-left: 10px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+    background-color: #ffffff44;
+    border-radius: 15px;
 }

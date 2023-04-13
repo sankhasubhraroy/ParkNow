@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Marcellus', serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    width: auto;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    margin-left: 20px;
+}
+
+.brand-text {
+    font-family: 'Barriecito', cursive;
+    font-size: x-large;
+    text-decoration: none;
+    background-image: linear-gradient(-225deg,
+            #7322dd 0%,
+            #dd22b1 29%,
+            #dd6a22 67%,
+            #ddd722 100%);
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 3s linear infinite;
+}
+
+.brand-text:hover {
+    background-image: linear-gradient(-225deg,
+            #e7dff2 0%,
+            #7bd246 29%,
+            #dddd22 67%,
+            #6866d3 100%);
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 3s linear infinite;
+}
+
+@keyframes textclip {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.menu-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.menu-list li {
+    margin: 0 20px;
+}
+
+.menu-list .menu-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    /* border-radius: 10px; */
+    transition: background-color 0.3s ease-in;
+}
+
+.menu-list .menu-link:hover {
+    background-color: #ffffff2c;
+    transition: background-color 0.3s ease-out;
+}
+
+.menu-list .menu-link:visited {
+    background-color: #ffffff2c;
+}
+
+.menu-sp-link {
+    border: 1px solid #ffffff2c;
+}
+
+.profile-link {
+    display: flex;
+    align-items: center;
+}
+
+.profile-link img {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #ffffff00;
+    border-radius: 40px;
+    transition: .3s;
+}
+
+.profile-link img:hover {
+    border: 3px solid #7cd246a1;
+    transition: .3s;
+}
+
+.menu-toggle,
+.menu-switch {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: normal;
+        padding: 5px;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .active {
+        display: block;
+    }
+
+    .menu-list {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .menu-list li {
+        margin: 20px 0px;
+    }
+
+    .on {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        right: 10%;
+    }
+
+    .on i {
+        padding: 5px 7px;
+        color: #ffffffc5;
+        border-radius: 50%;
+        transition: background-color .4s;
+    }
+
+    .on i:hover {
+        background-color: #ffffff42;
+        border-radius: 50%;
+        transition: background-color .4s;
+    }
+}

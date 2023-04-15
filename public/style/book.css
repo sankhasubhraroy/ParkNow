@@ -127,6 +127,10 @@ body {
     color: white;
 }
 
+.price {
+    color: #333;
+}
+
 /* The close button */
 .closebtn {
     padding: 5px;

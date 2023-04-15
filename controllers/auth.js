@@ -143,6 +143,21 @@ exports.book = async (req, res) => {
     // console.log(req.body);
     const { vehicleType, vehicleNo, date, time, duration } = req.body;
 
+    if (vehicleType == 'car') {
+        var price = 100;
+    }
+    else if (vehicleType == 'motorcycle') {
+        var price = 50;
+    }
+    else if (vehicleType == 'truck') {
+        var price = 200;
+    }
+
+    // console.log(price);
+    const amount = price * duration;
+    // console.log(amount);
+
+
     if (req.cookies.userSave) {
         // 1. Verify the token
         const decoded = await promisify(jwt.verify)(req.cookies.userSave,
@@ -174,12 +189,17 @@ exports.book = async (req, res) => {
                     }
                     else {
                         return res.render('book', {
-                            message: 'Ordered Successfully'
+                            message: 'Booked Successfully',
+                            payment: true,
+                            amount
                         });
                     }
                 });
             }
         });
+    }
+    else {
+        next();
     }
 }
 
@@ -198,8 +218,168 @@ exports.profile = async (req, res, next) => {
             // let record = result.length;
             req.bookings = result;
             return next();
-
-
         })
     }
+    else {
+        return next();
+    }
+}
+
+
+exports.adminLogin = async (req, res) => {
+
+    const { admin_email, admin_password } = req.body;
+
+    if (!admin_email || !admin_password) {
+        return res.status(400).render('adminLogin', {
+            message: "Please Provide an email or password"
+        })
+    }
+    else {
+        db.query('SELECT * FROM admin WHERE admin_email = ?', [admin_email], async (err, results) => {
+
+            console.log(results[0]);
+
+            if (err) {
+                console.log(err);
+            }
+
+            else if (!results[0] || !await bcrypt.compare(admin_password, results[0].admin_password)) {
+                return res.status(401).render('adminLogin', {
+                    message: 'Email or Password is incorrect'
+                })
+            }
+            else {
+                const admin_id = results[0].admin_id;
+
+                const token = jwt.sign({ admin_id }, process.env.JWT_SECRET, {
+                    expiresIn: process.env.JWT_EXPIRES_IN,
+                });
+
+                console.log("the token is " + token);
+
+                const cookieOptions = {
+                    expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
+                    httpOnly: true
+                }
+                res.cookie('adminSave', token, cookieOptions);
+                res.status(200).redirect("/admin/dashboard");
+            }
+        })
+    }
+}
+
+
+
+exports.adminRegister = (req, res) => {
+    console.log(req.body);
+
+    const { admin_name, admin_email, admin_password, passwordConfirm } = req.body;
+
+    if (!admin_name || !admin_email || !admin_password || !passwordConfirm) {
+        return res.render("adminRegister", {
+            message: 'All fields are mandatory'
+        });
+    }
+    else {
+
+        db.query('SELECT admin_email from admin WHERE admin_email = ?', [admin_email], async (err, results) => {
+            console.log(results)
+            console.log(results[0])
+            if (err) {
+                console.log(err);
+            }
+
+            else if (Object.keys(results).length > 0) {
+                return res.render("adminRegister", {
+                    message: 'The email is already in use'
+                })
+            }
+            else if (admin_password != passwordConfirm) {
+                return res.render("adminRegister", {
+                    message: 'Password don\'t match'
+                });
+            }
+
+            let hashedPassword = await bcrypt.hash(admin_password, 10);
+            console.log(hashedPassword);
+
+            db.query('INSERT INTO admin SET ?', { admin_name: admin_name, admin_email: admin_email, admin_password: hashedPassword }, (err, results) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    return res.render("adminRegister", {
+                        message: 'Admin registered'
+                    });
+                }
+            })
+        })
+    }
+}
+
+
+exports.isAdminLoggedIn = async (req, res, next) => {
+    if (req.cookies.adminSave) {
+        try {
+            // 1. Verify the token
+            const decoded = await promisify(jwt.verify)(req.cookies.adminSave,
+                process.env.JWT_SECRET
+            );
+            console.log(decoded);
+
+            // 2. Check if the user still exist
+            db.query('SELECT * FROM admin WHERE admin_id = ?', [decoded.admin_id], (err, results) => {
+                // console.log(results);
+                if (!results) {
+                    return next();
+                }
+                req.admin = results[0];
+                return next();
+            });
+        } catch (err) {
+            console.log(err)
+            return next();
+        }
+    } else {
+        next();
+    }
+}
+
+
+exports.adminLogout = async (req, res) => {
+    res.clearCookie('adminSave');
+    res.status(200).redirect("/");
+}
+
+
+
+exports.adminDashboard = async (req, res, next) => {
+
+    if (req.cookies.adminSave) {
+        db.query('SELECT * FROM bookings ORDER BY  date ASC', (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                req.bookings = result;
+                return next();
+            }
+        })
+    }
+    else {
+        return next();
+    }
+}
+
+exports.deleteBookingHistory = (req, res) => {
+
+    console.log(req.query.order_id);
+    db.query('DELETE FROM bookings WHERE order_id = ?', [req.query.order_id], (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.redirect('/admin/dashboard');
+        }
+    })
 }

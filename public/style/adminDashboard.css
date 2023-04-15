@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.dashboard-card {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.dashboard-card h2 {
+    margin-top: 0;
+}
+
+.dashboard-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-card li {
+    margin: 10px 0;
+}
+
+.dashboard-card li span {
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+
+    /* border-collapse: */
+}
+
+table th,
+table td {
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #333;
+    color: #fff;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f1f1f1;
+}

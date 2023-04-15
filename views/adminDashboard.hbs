@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/style/adminDashboard.css">
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <main>
+        <h1>Welcome to Your Dashboard, {{adminName}}</h1>
+        <div class="dashboard-card">
+            <h2>Admin Account</h2>
+            <ul>
+                <li><span>Id:</span> {{adminId}}</li>
+                <li><span>Name:</span> {{adminName}}</li>
+                <li><span>Email:</span> {{adminEmail}}</li>
+                <li><span>Total Bookings:</span> {{totalBookings}}</li>
+                {{!-- <li><span>Phone:</span> 555-555-5555</li> --}}
+                {{!-- <li><span>Address:</span> 123 Main St, Anytown USA</li> --}}
+            </ul>
+        </div>
+        <div class="dashboard-card">
+            <h2>All Bookings</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer Id</th>
+                        <th>Customer Name</th>
+                        <th>Vehicle Type</th>
+                        <th>Vehicle No</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Duration</th>
+                        <th>Booking Id</th>
+                        <th>Action</th>
+                        {{!-- <th>Price</th> --}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each bookingHistory}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.vehicle_type}}</td>
+                        <td>{{this.vehicle_no}}</td>
+                        <td>{{this.date}}</td>
+                        <td>{{this.time}}</td>
+                        <td>{{this.duration}}</td>
+                        <td>{{this.order_id}}</td>
+                        <td><a href="/auth/admin/delete-booking-history?order_id={{this.order_id}}"><i
+                                    class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+
+</html>

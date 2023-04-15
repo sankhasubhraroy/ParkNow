@@ -1,0 +1,57 @@
+/* Payment Modal Styles */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+
+.modal-content {
+    min-width: 200px;
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    right: 40%;
+    background-color: #fefefe;
+    border: 1px solid #88888831;
+    border-radius: 25px;
+    box-shadow: 0 10px 50px -10px rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    width: 20%;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+}
+
+.logo img {
+    width: 100%;
+}
+
+.price {
+    margin: 20px;
+}
+
+.pay-link {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+}
+
+.pay-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: large;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.6s;
+}
+
+.pay-btn:hover {
+    background-color: #d32f2f;
+}
+
+
+@media (max-width: 400px) {
+    .modal-content {
+        top: 70%;
+        left: 25%;
+    }
+}

@@ -3,12 +3,19 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
 const { request } = require("http");
+const Razorpay = require("razorpay");
+const crypto = require("crypto");
 
 const db = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.DATABASE_USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE
+});
+
+const instance = new Razorpay({
+    key_id: process.env.KEY_ID,
+    key_secret: process.env.KEY_SECRET
 });
 
 
@@ -49,7 +56,7 @@ exports.login = async (req, res) => {
                     httpOnly: true
                 }
                 res.cookie('userSave', token, cookieOptions);
-                res.status(200).redirect("/profile");
+                res.status(200).redirect("/account");
             }
         })
     }
@@ -59,7 +66,7 @@ exports.login = async (req, res) => {
 exports.register = (req, res) => {
     console.log(req.body);
 
-    const { name, email, password, passwordConfirm } = req.body;
+    const { name, email, mobile_no, date_of_birth, address, password, passwordConfirm } = req.body;
 
     if (!name || !email || !password || !passwordConfirm) {
         return res.render("register", {
@@ -82,26 +89,24 @@ exports.register = (req, res) => {
             }
             else if (password != passwordConfirm) {
                 return res.render("register", {
-                    message: 'Password dont match'
+                    message: 'Password don\'t match'
                 });
             }
 
             let hashedPassword = await bcrypt.hash(password, 8);
             console.log(hashedPassword);
 
-            db.query('INSERT INTO users SET ?', { name: name, email: email, password: hashedPassword }, (err, results) => {
+            db.query('INSERT INTO users SET ?', { name, email, mobile_no, date_of_birth, address, password: hashedPassword }, (err, results) => {
                 if (err) {
                     console.log(err);
                 } else {
                     return res.render("register", {
-                        message: 'User registered'
+                        message: 'User successfully registered'
                     });
                 }
             })
         })
     }
-
-    // res.send("Form submitted");
 }
 
 
@@ -138,8 +143,32 @@ exports.logout = async (req, res) => {
     res.status(200).redirect("/");
 }
 
+exports.editDetails = async (req, res, next) => {
+    // console.log(req.body);
+    const { name, email, mobile_no, date_of_birth, address } = req.body;
 
-exports.book = async (req, res) => {
+    if (req.cookies.userSave) {
+        // 1. Verify the token
+        const decoded = await promisify(jwt.verify)(req.cookies.userSave,
+            process.env.JWT_SECRET
+        );
+
+        db.query('UPDATE users SET name = ?, email = ?, mobile_no = ?, date_of_birth = ?, address = ? WHERE id = ?', [name, email, mobile_no, date_of_birth, address, decoded.id], (err, result) => {
+
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.status(200).redirect("/account");
+            }
+        });
+    }
+    else {
+        return next();
+    }
+}
+
+exports.book = async (req, res, next) => {
     // console.log(req.body);
     const { vehicleType, vehicleNo, date, time, duration } = req.body;
 
@@ -153,26 +182,22 @@ exports.book = async (req, res) => {
         var price = 200;
     }
 
-    // console.log(price);
     const amount = price * duration;
-    // console.log(amount);
 
 
     if (req.cookies.userSave) {
-        // 1. Verify the token
+
         const decoded = await promisify(jwt.verify)(req.cookies.userSave,
             process.env.JWT_SECRET
         );
-        // console.log(decoded);
 
 
         db.query('SELECT * FROM users WHERE id = ?', [decoded.id], (err, result) => {
-            // console.log(result);
-            // console.log(result[0]);
 
             const id = result[0].id;
             const name = result[0].name;
             const email = result[0].email;
+            const phoneNo = result[0].phone_no;
 
             if (err) {
                 console.log(err);
@@ -181,17 +206,36 @@ exports.book = async (req, res) => {
                 return res.render('book', {
                     message: 'Fill all the details, Please'
                 });
-            } else {
-                db.query('INSERT INTO bookings SET ?', { name: name, email: email, vehicle_type: vehicleType, vehicle_no: vehicleNo, date: date, time: time, duration: duration, id: id }, (err, result) => {
+            }
+            else {
+                const options = {
+                    amount: amount * 100,  // amount in the smallest currency unit
+                    currency: "INR",
+                    receipt: `order_receipt_id_${id}`
+                };
 
+                instance.orders.create(options, async (err, order) => {
                     if (err) {
                         console.log(err);
                     }
                     else {
-                        return res.render('book', {
-                            message: 'Booked Successfully',
-                            payment: true,
-                            amount
+                        // console.log(order);
+                        // console.log(order.id);
+                        // console.log(typeof (order.id));
+                        res.render('payment', {
+                            key_id: process.env.KEY_ID,
+                            amount: order.amount,
+                            orderId: order.id,
+                            display_amount: amount,
+                            id,
+                            name,
+                            email,
+                            phoneNo,
+                            vehicleNo,
+                            vehicleType,
+                            date,
+                            time,
+                            duration
                         });
                     }
                 });
@@ -203,8 +247,36 @@ exports.book = async (req, res) => {
     }
 }
 
+exports.verify = (req, res) => {
+    // console.log('the verify body:', req.body);
 
-exports.profile = async (req, res, next) => {
+    const { id, vehicleType, vehicleNo, date, time, duration, amount, razorpay_payment_id, razorpay_order_id, razorpay_signature } = req.body;
+    const key_secret = process.env.KEY_SECRET;
+
+    const hmac = crypto.createHmac('sha256', key_secret);
+
+    hmac.update(razorpay_order_id + "|" + razorpay_payment_id);
+
+    const generated_signature = hmac.digest('hex');
+
+    if (razorpay_signature === generated_signature) {
+        console.log('success');
+
+        db.query('INSERT INTO bookings SET ?', { vehicle_type: vehicleType, vehicle_no: vehicleNo, date: date, time: time, duration: duration, amount: amount, payment_id: razorpay_payment_id, id: id }, (err, result) => {
+
+            if (err) {
+                console.log(err);
+            }
+            else {
+                // res.render('confirmation');
+            }
+        });
+    }
+    else
+        console.log('fail');
+}
+
+exports.bookings = async (req, res, next) => {
 
     if (req.cookies.userSave) {
         // 1. Verify the token
@@ -214,8 +286,9 @@ exports.profile = async (req, res, next) => {
 
         db.query('SELECT * FROM bookings WHERE id = ?', [decoded.id], (err, result) => {
 
-            // console.log(result);
-            // let record = result.length;
+            if (err) {
+                console.log(err);
+            }
             req.bookings = result;
             return next();
         })
@@ -225,161 +298,24 @@ exports.profile = async (req, res, next) => {
     }
 }
 
+exports.expiredBookings = async (req, res, next) => {
 
-exports.adminLogin = async (req, res) => {
+    if (req.cookies.userSave) {
+        // 1. Verify the token
+        const decoded = await promisify(jwt.verify)(req.cookies.userSave,
+            process.env.JWT_SECRET
+        );
 
-    const { admin_email, admin_password } = req.body;
-
-    if (!admin_email || !admin_password) {
-        return res.status(400).render('adminLogin', {
-            message: "Please Provide an email or password"
-        })
-    }
-    else {
-        db.query('SELECT * FROM admin WHERE admin_email = ?', [admin_email], async (err, results) => {
-
-            console.log(results[0]);
+        db.query('SELECT * FROM expired_bookings WHERE id = ?', [decoded.id], (err, result) => {
 
             if (err) {
                 console.log(err);
             }
-
-            else if (!results[0] || !await bcrypt.compare(admin_password, results[0].admin_password)) {
-                return res.status(401).render('adminLogin', {
-                    message: 'Email or Password is incorrect'
-                })
-            }
-            else {
-                const admin_id = results[0].admin_id;
-
-                const token = jwt.sign({ admin_id }, process.env.JWT_SECRET, {
-                    expiresIn: process.env.JWT_EXPIRES_IN,
-                });
-
-                console.log("the token is " + token);
-
-                const cookieOptions = {
-                    expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
-                    httpOnly: true
-                }
-                res.cookie('adminSave', token, cookieOptions);
-                res.status(200).redirect("/admin/dashboard");
-            }
-        })
-    }
-}
-
-
-
-exports.adminRegister = (req, res) => {
-    console.log(req.body);
-
-    const { admin_name, admin_email, admin_password, passwordConfirm } = req.body;
-
-    if (!admin_name || !admin_email || !admin_password || !passwordConfirm) {
-        return res.render("adminRegister", {
-            message: 'All fields are mandatory'
-        });
-    }
-    else {
-
-        db.query('SELECT admin_email from admin WHERE admin_email = ?', [admin_email], async (err, results) => {
-            console.log(results)
-            console.log(results[0])
-            if (err) {
-                console.log(err);
-            }
-
-            else if (Object.keys(results).length > 0) {
-                return res.render("adminRegister", {
-                    message: 'The email is already in use'
-                })
-            }
-            else if (admin_password != passwordConfirm) {
-                return res.render("adminRegister", {
-                    message: 'Password don\'t match'
-                });
-            }
-
-            let hashedPassword = await bcrypt.hash(admin_password, 10);
-            console.log(hashedPassword);
-
-            db.query('INSERT INTO admin SET ?', { admin_name: admin_name, admin_email: admin_email, admin_password: hashedPassword }, (err, results) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    return res.render("adminRegister", {
-                        message: 'Admin registered'
-                    });
-                }
-            })
-        })
-    }
-}
-
-
-exports.isAdminLoggedIn = async (req, res, next) => {
-    if (req.cookies.adminSave) {
-        try {
-            // 1. Verify the token
-            const decoded = await promisify(jwt.verify)(req.cookies.adminSave,
-                process.env.JWT_SECRET
-            );
-            console.log(decoded);
-
-            // 2. Check if the user still exist
-            db.query('SELECT * FROM admin WHERE admin_id = ?', [decoded.admin_id], (err, results) => {
-                // console.log(results);
-                if (!results) {
-                    return next();
-                }
-                req.admin = results[0];
-                return next();
-            });
-        } catch (err) {
-            console.log(err)
+            req.expiredBookings = result;
             return next();
-        }
-    } else {
-        next();
-    }
-}
-
-
-exports.adminLogout = async (req, res) => {
-    res.clearCookie('adminSave');
-    res.status(200).redirect("/");
-}
-
-
-
-exports.adminDashboard = async (req, res, next) => {
-
-    if (req.cookies.adminSave) {
-        db.query('SELECT * FROM bookings ORDER BY  date ASC', (err, result) => {
-            if (err) {
-                console.log(err);
-            }
-            else {
-                req.bookings = result;
-                return next();
-            }
         })
     }
     else {
         return next();
     }
-}
-
-exports.deleteBookingHistory = (req, res) => {
-
-    console.log(req.query.order_id);
-    db.query('DELETE FROM bookings WHERE order_id = ?', [req.query.order_id], (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.redirect('/admin/dashboard');
-        }
-    })
 }

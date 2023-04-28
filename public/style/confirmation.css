@@ -13,7 +13,7 @@ body {
     font-size: 16px;
     line-height: 1.5;
     color: #333;
-    background: #eeeaeb;
+    background: #33333355;
 }
 
 .main-container {
@@ -24,8 +24,8 @@ body {
 }
 
 .container {
-    width: 260px;
-    margin: auto;
+    width: 360px;
+    margin: 30px;
     border-radius: 10px;
     box-shadow: 0px 0px 40px #33333355;
 }
@@ -36,51 +36,42 @@ body {
     border-radius: 10px;
 }
 
-.card-head .details-box {
-    font-family: 'Poppins', sans-serif;
-    font-size: smaller;
-    font-weight: bold;
-    color: #3333338f;
-    background-color: #fff;
-    margin: 20px 0px;
-    padding: 10px;
-    border-radius: 7px;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.164);
+.logo-box {
+    font-size: 4rem;
+    text-align: center;
+    position: relative;
+    bottom: 70px;
 }
 
-.details-box ul li {
-    list-style: none;
+.logo-box .fa {
+    background-color: #00bd3f;
+    color: #fff;
+    padding: 15px;
+    border-radius: 50%;
 }
 
 .reminder-box {
-    display: flex;
-    flex-direction: row;
-    font-size: x-small;
+    text-align: center;
     color: #333333b2;
+    margin-bottom: 50px;
 }
 
-.reminder-box i {
-    margin: 8px 6px;
-    padding: 2px 4px;
-    border-radius: 50%;
-    background-color: #33333327;
+.card-body {
+    text-align: center;
 }
 
-.price-box {
-    margin: 10px 0px;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
+.card-body a {
+    text-decoration: none;
+    color: #fff;
 }
 
 button {
-    display: block;
-    width: 100%;
+    width: 80%;
     padding: 10px 30px;
-    font-weight: bold;
+    font-size: large;
     text-transform: uppercase;
     color: #fff;
-    background-color: #615dde;
+    background-color: #00bd3f;
     border: none;
     border-radius: 5px;
     transition: background-color ease-out 0.3s;
@@ -88,5 +79,5 @@ button {
 
 button:hover {
     cursor: pointer;
-    background-color: #504cc3;
+    background-color: #01a537;
 }

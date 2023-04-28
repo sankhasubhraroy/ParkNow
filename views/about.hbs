@@ -5,67 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/9f5e9c7e33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style/footer.css">
-    <link rel="stylesheet" href="/style/nav.css">
+    <link rel="stylesheet" href="/style/navbar.css">
     <link rel="stylesheet" href="/style/about.css">
     <title>About Us</title>
 </head>
 
 <body>
 
-    <header>
-        <nav>
-            <div class="brand">
-                <a class="brand-text" href="/">ParkNow</a>
-            </div>
-
-            <div class="menu">
-                <ul class="menu-list">
-                    <li>
-                        <a class="menu-link" href="/">Home</a>
-                    </li>
-                    <li>
-                        <a class="menu-link" href="/about">About</a>
-                    </li>
-                    <li>
-                        <a class="menu-link" href="/services">Services</a>
-                    </li>
-                    <li>
-                        <a class="menu-link" href="/contact">Contact</a>
-                    </li>
-
-                    {{#unless visibility}}
-                    <li>
-                        <a class="menu-link menu-sp-link" href="/login">Login</a>
-                    </li>
-                    <li>
-                        <a class="menu-link menu-sp-link" href="/logout">Register</a>
-                    </li>
-                    {{/unless}}
-
-                    {{#if visibility}}
-                    <li>
-                        <a class="profile-link" href="/profile">
-                            <img src="/avatar.png" alt="Avatar">
-                        </a>
-                    </li>
-                    {{/if}}
-                </ul>
-            </div>
-
-            <div class="menu-toggle on">
-                <i class="fa fa-bars"></i>
-            </div>
-
-            <div class="menu-switch">
-                <i class="fa fa-close"></i>
-            </div>
-        </nav>
-    </header>
+    {{>navbar}}
 
     <div class="about-section">
         <h1>About Us</h1>
@@ -129,125 +78,7 @@
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="footer-container">
-
-            <a href="/">
-                <h1 class="footer-logo">ParkNow</h1>
-            </a>
-
-            <div class="footer-contact">
-
-                <h2 class="footer-title">Contact</h2>
-                <address>
-                    <p>ParkNow Team</p>
-                    <a class="footer-btn" href="mailto:sankha.roy.dev@gmail.com">Email Us</a>
-                </address>
-            </div>
-        </div>
-
-        <div class="footer-nav">
-
-            <div class="footer-item">
-
-                <h2 class="footer-title">Useful Links</h2>
-                <ul class="footer-list">
-                    <li>
-                        <a href="#">Pricing Details</a>
-                    </li>
-                    <li>
-                        <a href="#">Partnership</a>
-                    </li>
-                    <li>
-                        <a href="#">Raise a Complaint</a>
-                    </li>
-                    <li>
-                        <a href="#">Help</a>
-                    </li>
-                    <li>
-                        <a href="#">Support</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="footer-item">
-
-                <h2 class="footer-title">Admin</h2>
-                <ul class="footer-list">
-                    <li>
-                        <a href="#">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#">Admin Profile</a>
-                    </li>
-                    <li>
-                        <a href="#">Affiliates</a>
-                    </li>
-                    <li>
-                        <a href="#">Resources</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="footer-item">
-
-                <h2 class="footer-title">Legal</h2>
-                <ul class="footer-list">
-                    <li>
-                        <a href="#">Privacy Policy</a>
-                    </li>
-                    <li>
-                        <a href="#">Terms and Conditions</a>
-                    </li>
-                    <li>
-                        <a href="#">Sitemap</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="footer-item">
-
-                <h2 class="footer-title">Social Media</h2>
-                <ul class="footer-list">
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-twitter"></i> Twitter
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="">
-                            <i class="fa fa-linkedin-square"></i> LinkedIn
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-facebook-official"></i> Facebook
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-instagram"></i> Instagram
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa fa-github"></i> GitHub
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-
-        <div class="legal">
-            <p>&copy; 2023 ParkNow. All rights reserved.</p>
-
-            <div class="legal-links">
-                <span>Made by Sankhasubhra Roy</span>
-            </div>
-        </div>
-    </footer>
+    {{>footer}}
 
     <script>
         const menuToggle = document.querySelector('.menu-toggle');

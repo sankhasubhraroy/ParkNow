@@ -5,25 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <script src="https://kit.fontawesome.com/9f5e9c7e33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style/login.css">
-
     <title>Register</title>
-
 </head>
 
 <body>
-
     <div class="main-container">
-
-        <div class="login-wrapper">
-
+        <div class="container">
             <div class="login-body">
-
                 <form class="login-form" action="/auth/register" method="POST">
-
                     <h4 class="login-text">Register</h4>
 
                     <div class="input-container">
@@ -36,10 +27,40 @@
                     </div>
 
                     <div class="input-container">
-                        <label for="email" class="form-label-text">Email address</label>
+                        <label for="email" class="form-label-text">Email</label>
                         <input type="email" class="form-input" id="email" name="email" placeholder="Type your email id">
                         <span class="animated-symbol">
                             <i class="fa fa-envelope"></i>
+                        </span>
+                        <span class="bottom-border"></span>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="mno" class="form-label-text">Phone Number</label>
+                        <input type="tel" class="form-input" id="mno" name="mobile_no"
+                            placeholder="Type your phone number">
+                        <span class="animated-symbol">
+                            <i class="fa fa-phone"></i>
+                        </span>
+                        <span class="bottom-border"></span>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="dob" class="form-label-text">Date of Birth</label>
+                        <input type="date" class="form-input" id="dob" name="date_of_birth"
+                            placeholder="Type your date of birth">
+                        <span class="animated-symbol">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        <span class="bottom-border"></span>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="address" class="form-label-text">Address</label>
+                        <input type="text" class="form-input" id="address" name="address"
+                            placeholder="Type your address">
+                        <span class="animated-symbol">
+                            <i class="fa-solid fa-location-dot"></i>
                         </span>
                         <span class="bottom-border"></span>
                     </div>
@@ -70,23 +91,14 @@
                 <div class="signup-redirect">
                     <p>Already have an account? <a href="/login">login</a> here</p>
                 </div>
-
-                <div class="social-media">
-
-                    <p>or Register Using</p>
-                    <a href="#"><i class="fa fa-facebook"></i></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                </div>
             </div>
-
-            {{#if message}}
-            <div class="alert">
-                <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-                {{message}}
-            </div>
-            {{/if}}
         </div>
+        {{#if message}}
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+            {{message}}
+        </div>
+        {{/if}}
     </div>
 
     <script>

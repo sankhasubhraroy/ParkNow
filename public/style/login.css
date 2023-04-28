@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
     margin: 0;
@@ -9,7 +8,7 @@
 }
 
 body {
-    font-family: 'Marcellus', serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     color: #333;
@@ -17,28 +16,23 @@ body {
 }
 
 .main-container {
-    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-.login-wrapper {
-    width: 100%;
-    min-height: 100vh;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+.container {
+    width: 420px;
+    padding: 20px;
 }
 
 .login-body {
     overflow: hidden;
     background: #fff;
     border: 1px solid #33333326;
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     padding: 40px;
 }
@@ -58,7 +52,7 @@ body {
     height: 50px;
     width: 100%;
     padding-left: 50px;
-    font-family: 'Marcellus', serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     border-top: none;
     border-right: none;
@@ -74,7 +68,6 @@ body {
     margin-top: -50px;
     padding-top: 12px;
     box-sizing: border-box;
-    /* border: 2px solid black; */
     color: lightgray;
     font-variation-settings:
         'FILL' 0,
@@ -122,24 +115,22 @@ body {
 
 .submit-button {
     display: block;
-    width: fit-content;
     margin: auto;
     margin-top: 10%;
     padding: 10px 30px;
     background-color: #dc8b3b;
-    font-family: 'Marcellus', serif;
     color: #ffffff;
     font-size: 20px;
     font-weight: bold;
     border: none;
     border-radius: 30px;
-    transition: background-color .5s;
+    transition: all ease-in-out .35s;
 }
 
 .submit-button:hover {
     cursor: pointer;
     background-color: #e2c72b;
-    color: #0e0000;
+    color: #333;
     transition: .5s;
 }
 
@@ -148,49 +139,27 @@ body {
     margin-top: 10%;
 }
 
-.social-media {
-    text-align: center;
-    /* margin-top: 5%; */
-}
-
-.social-media a {
-    text-decoration: none;
-    margin-top: 5px;
-}
-
-.social-media a i {
-    width: 10%;
-    transition: .3s;
-}
-
-.social-media a i:hover {
-    color: #dc8b3b;
-    transition: .3s;
-}
-
-/* The alert message box */
 .alert {
     position: absolute;
-    bottom: 15px;
+    bottom: 40px;
     padding: 10px;
     background-color: #f44336cc;
     color: white;
 }
 
-/* The close button */
 .closebtn {
-    padding: 5px;
+    padding: 4px 5px;
     margin-left: 10px;
+    border-radius: 15px;
     color: white;
     font-weight: bold;
     float: right;
     font-size: 22px;
     line-height: 15px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background-color linear 0.3s;
 }
 
-/* When moving the mouse over the close button */
 .closebtn:hover {
     background-color: #ffffff44;
     border-radius: 15px;

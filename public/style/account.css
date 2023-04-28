@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Taprom&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background: #eeeaeb;
+}
+
+.main-container {
+    max-height: 100vh;
+}
+
+.back-btn {
+    background-color: #01d28c5c;
+    width: fit-content;
+    border-radius: 30px;
+    position: absolute;
+}
+
+.back-btn a {
+    text-decoration: none;
+    color: #f3f3f3;
+}
+
+.back-btn .fa {
+    padding: 5px 10px;
+}
+
+.upper-section {
+    background: linear-gradient(180deg, #00d2ff 0%, #3a47d5 100%);
+}
+
+.account-card {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card-left {
+    display: flex;
+    align-items: center;
+}
+
+.card-left .welcome-message {
+    font-family: 'Taprom', cursive;
+    font-size: 2rem;
+    color: #f3f3f3;
+}
+
+.welcome-message h1 {
+    opacity: 0;
+    filter: blur(4px);
+    transform: scale(0.94);
+    animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+@keyframes scale {
+    100% {
+        transform: scale(1);
+    }
+}
+
+.welcome-message h1:nth-child(1) {
+    animation: fade-in 0.8s 0.2s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+.welcome-message h1:nth-child(2) {
+    animation: fade-in 0.8s 0.5s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+@keyframes fade-in {
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+.card-right .logo {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    border: 25px solid #eeeaeb;
+    position: relative;
+    top: 120px;
+}
+
+.card-right a {
+    text-decoration: none;
+    display: block;
+    border-radius: 50%;
+}
+
+.card-right img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px #333;
+    transition: ease-out 0.3s;
+}
+
+.card-right img:hover {
+    animation: tilt-shaking 0.45s;
+}
+
+@keyframes tilt-shaking {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.account-links {
+    padding: 120px 30px 10px 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.account-links a {
+    text-decoration: none;
+}
+
+.link-box {
+    width: 260px;
+    height: 120px;
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0px 3px 9px #858585a4;
+    transition: all ease-out 0.35s;
+}
+
+.link-box:hover {
+    transform: scale(1.03);
+}
+
+.link-box i {
+    font-size: 3.5rem;
+    margin-right: 20px;
+}
+
+.link-box .info {
+    font-family: 'Poppins', sans-serif;
+    font-size: .75rem;
+}
+
+#profile {
+    background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+    color: #3d077a;
+}
+
+#profile:hover {
+    background: linear-gradient(270deg, #d53369 0%, #daae51 100%);
+    color: #5615a1;
+}
+
+#settings {
+    background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+    color: #3d077a;
+}
+
+#settings:hover {
+    background: linear-gradient(270deg, #00C9FF 0%, #92FE9D 100%);
+    color: #5615a1;
+}
+
+#bookings {
+    background: linear-gradient(90deg, #FDBB2D 0%, #22C1C3 100%);
+    color: #3d077a;
+}
+
+#bookings:hover {
+    background: linear-gradient(270deg, #FDBB2D 0%, #22C1C3 100%);
+    color: #5615a1;
+}
+
+#support {
+    background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);
+    color: #3d077a;
+}
+
+#support:hover {
+    background: linear-gradient(270deg, #efd5ff 0%, #515ada 100%);
+    color: #5615a1;
+}
+
+#logout {
+    background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+    color: #3d077a;
+}
+
+#logout:hover {
+    background: linear-gradient(270deg, #e3ffe7 0%, #d9e7ff 100%);
+    color: #5615a1;
+}
+
+
+
+@media screen and (max-width: 668px) {
+    .account-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .welcome-message {
+        position: relative;
+        top: 55px;
+    }
+
+    .account-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .account-links a {
+        width: 100%;
+    }
+
+    .link-box {
+        width: 90%;
+    }
+}

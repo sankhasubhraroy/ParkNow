@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path")
 const mysql = require("mysql");
 const dotenv = require("dotenv");
+const hbs = require("hbs");
 const exp = require('constants');
 const cookieParser = require("cookie-parser");
 
@@ -18,14 +19,16 @@ const db = mysql.createConnection({
 
 
 const publicDirectory = path.join(__dirname, './public');
-app.use(express.static(publicDirectory));
-// console.log(__dirname);
+const partialsDirectory = path.join(__dirname, './partials');
 
+app.use(express.static(publicDirectory));
 // ParseURL-Extended bodie (as sent by HTML Forms)
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
 app.use(cookieParser());
+
 app.set('view engine', 'hbs');
+hbs.registerPartials(partialsDirectory);
 
 db.connect((err) => {
     if (err) {

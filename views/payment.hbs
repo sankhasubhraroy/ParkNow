@@ -5,27 +5,114 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/9f5e9c7e33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style/payment.css">
-    <title>Document</title>
+    <title>Payment</title>
 </head>
 
 <body>
-    <!-- Payment Modal -->
-    <div class="modal-content">
-        <div class="logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Razorpay_logo.svg" alt="">
+    <div class="main-container">
+        <div class="container">
+            <div class="payment-card">
+                <div class="card-head">
+                    <h1>Confirm</h1>
+                    <div class="details-box">
+                        <ul>
+                            <h3>{{name}}</h3>
+                            <p>{{email}}</p>
+                            <li>Vehicle Type: {{vehicleType}}</li>
+                            <li>Vehicle No: {{vehicleNo}}</li>
+                            <li>Date: {{date}}</li>
+                            <li>Time: {{time}}</li>
+                            <li>Duration: {{duration}} Hour</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="reminder-box">
+                        <i class="fa fa-lock"></i>
+                        <p>Kindly confirm your booking details before proceeding further</p>
+                    </div>
+                    <div class="price-box">
+                        <p>Total Amount</p>
+                        <p>{{display_amount}}₹</p>
+                    </div>
+                    <button id="rzp-button">Pay Now</button>
+                </div>
+            </div>
         </div>
-
-        <div class="price">
-            <h1>100 <i class="fa fa-inr"></i></h1>
-        </div>
-
-        <a href="/profile" class="pay-link">
-            <button class="pay-btn">Pay</button>
-        </a>
     </div>
 
+    {{#if orderId}}
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        const options = {
+            "key": "{{key_id}}", // Enter the Key ID generated from the Dashboard
+            "amount": "{{amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "ParkNow",
+            "description": "Pay and book your park anywhere, anytime.",
+            "image": "https://i.ibb.co/7CPBGwk/Park-Now-Logo-2.png",
+            "order_id": "{{orderId}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+                window.location.href = "/account";
+                fetch("/auth/book/verify", {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    body: JSON.stringify({
+                        id: "{{id}}",
+                        vehicleType: "{{vehicleType}}",
+                        vehicleNo: "{{vehicleNo}}",
+                        date: "{{date}}",
+                        time: "{{time}}",
+                        duration: "{{duration}}",
+                        amount: "{{display_amount}}",
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_signature: response.razorpay_signature
+                    })
+                }).then(function (res) { console.log(res) })
+                    .catch(function (res) { console.log(res) })
+            },
+            "prefill": {
+                "name": "{{name}}",
+                "email": "{{email}}",
+                "contact": "{{phoneNo}}"
+            },
+            "notes": {
+                "address": "ParkNow Corporate Office, India"
+            },
+            "theme": {
+                "color": "#00853E"
+            }
+        };
+        const rzp = new Razorpay(options);
+        rzp.on('payment.failed', function (response) {
+            alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id);
+        });
+        document.getElementById('rzp-button').onclick = function (e) {
+            rzp.open();
+            e.preventDefault();
+        }
+    </script>
+    {{/if}}
+
+    <script>
+        const payButton = document.getElementById('rzp-button');
+        const payCard = document.querySelector('.payment-card');
+        payButton.addEventListener('click', () => {
+            payCard.style.display = 'none'
+        });
+    </script>
 </body>
 
 </html>

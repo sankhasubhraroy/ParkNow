@@ -5,29 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <script src="https://kit.fontawesome.com/9f5e9c7e33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style/login.css">
-
     <title>Login</title>
-
 </head>
 
 <body>
-
     <div class="main-container">
-
-        <div class="login-wrapper">
-
+        <div class="container">
             <div class="login-body">
-
                 <form class="login-form" action="/auth/login" method="POST">
-
                     <h4 class="login-text">Login</h4>
 
                     <div class="input-container">
-                        <label for="email" class="form-label-text">Email address</label>
+                        <label for="email" class="form-label-text">Email</label>
                         <input type="email" class="form-input" id="email" name="email" placeholder="Type your email id">
                         <span class="animated-symbol">
                             <i class="fa fa-envelope"></i>
@@ -55,25 +46,17 @@
                 <div class="signup-redirect">
                     <p>Don't have an account? <a href="/register">register</a> here</p>
                 </div>
-
-                <div class="social-media">
-
-                    <p>or Register Using</p>
-                    <a href="#"><i class="fa fa-facebook"></i></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                </div>
             </div>
-
-            {{#if message}}
-            <div class="alert">
-                <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-                {{message}}
-            </div>
-            {{/if}}
         </div>
+        {{#if message}}
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+            {{message}}
+        </div>
+        {{/if}}
     </div>
 
+    {{#if message}}
     <script>
         const closeButton = document.querySelector('.closebtn');
         const alertDiv = closeButton.parentElement;
@@ -82,6 +65,7 @@
             alertDiv.style.display = 'none'
         }, 6000)
     </script>
+    {{/if}}
 </body>
 
 </html>

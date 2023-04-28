@@ -5,275 +5,92 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/style/footer.css">
-    <link rel="stylesheet" href="/style/nav.css">
+    <script src="https://kit.fontawesome.com/9f5e9c7e33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style/profile.css">
     <title>Profile</title>
 </head>
 
 <body>
-
-    <header>
-        <nav>
-            <div class="brand">
-                <a class="brand-text" href="/">ParkNow</a>
-            </div>
-
-            <div class="menu">
-                <ul class="menu-list">
-                    <li>
-                        <a class="menu-link" href="/">Home</a>
-                    </li>
-                    <li>
-                        <a class="menu-link" href="/about">About</a>
-                    </li>
-                    <li>
-                        <a class="menu-link" href="/services">Services</a>
-                    </li>
-                    <li>
-                        <a class="menu-link" href="/contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="menu-toggle on">
-                <i class="fa fa-bars"></i>
-            </div>
-
-            <div class="menu-switch">
-                <i class="fa fa-close"></i>
-            </div>
-        </nav>
-    </header>
-
     <div class="main-container">
-        <div class="profile-wrapper">
+        <div class="container">
 
-            <div class="profile-container">
-
-                <div class="profile-header">
-                    <img src="/avatar.png" alt="Avatar">
-                </div>
-
-                <div class="profile-body">
-                    <p class="profile-name">{{userName}}</p>
-                    <p class="profile-email">{{userEmail}}</p>
-                    <a class="edit-btn" href="/">Share Profile</a>
-                    <a class="logout-btn" href="/auth/logout">Logout</a>
-                </div>
+            <div class="back-btn">
+                <a href="javascript:history.back()"><i class="fa fa-chevron-left"></i></a>
             </div>
 
-            <div class="details-container">
-
-                <div class="details-chart">
-
-                    <div class="chart-row">
-                        <span class="row-header">Full Name</span>
-                        <span class="row-body">{{userName}}</span>
+            <div class="row">
+                <div class="left-part">
+                    <div class="profile-section">
+                        <div class="avatar-section">
+                            <img src="/avatar.jpg" alt="avatar">
+                        </div>
+                        <div class="info-section">
+                            <h2>{{userName}}</h2>
+                            <p title="User Id"><i class="fa fa-fingerprint"></i>{{userId}}</p>
+                            <p title="Email Address"><i class="fa fa-envelope"></i>{{userEmail}}</p>
+                            <p title="Phone Number"><i class="fa fa-phone"></i>{{userPhone}}</p>
+                            <p title="Date of Birth"><i class="fa fa-regular fa-calendar-days"></i></i>{{userDob}}</p>
+                            <p title="Address"><i class="fa fa-location-dot"></i>{{userAddress}}</p>
+                        </div>
                     </div>
-                    <hr>
-                    <div class="chart-row">
-                        <span class="row-header">Email</span>
-                        <span class="row-body">{{userEmail}}</span>
-                    </div>
-                    <hr>
-                    <div class="chart-row">
-                        <span class="row-header">Mobile No</span>
-                        <span class="row-body">{{userMobile}}</span>
-                    </div>
-                    <hr>
-                    <div class="chart-row">
-                        <span class="row-header">Date of Birth</span>
-                        <span class="row-body">{{userDob}}</span>
-                    </div>
-                    <hr>
-                    <div class="chart-row">
-                        <span class="row-header">Address</span>
-                        <span class="row-body">{{userAddress}}</span>
-                    </div>
-                    <hr>
-                    <a href="/profile/edit" class="details-btn">Edit</a>
                 </div>
-            </div>
 
-            <div class="booking-container">
-                <div class="advertise">
-                    <span class="ad-header">Total Bookings</span>
-                    <span class="ad-body">{{totalBookings}}</span>
+                <div class="right-part">
+                    <form action="/auth/account/profile/edit-details" method="POST" class="edit-details-form">
+                        <h2>Edit Details</h2>
+
+                        <div class="form-data">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-input" id="name" name="name" value="{{userName}}">
+                            <span class="animated-symbol">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <span class="bottom-border"></span>
+                        </div>
+
+                        <div class="form-data">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-input" id="email" name="email" value="{{userEmail}}">
+                            <span class="animated-symbol">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                            <span class="bottom-border"></span>
+                        </div>
+
+                        <div class="form-data mno">
+                            <label for="mobileNo" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" id="mobileNo" name="mobile_no" value="{{userPhone}}">
+                            <span class="animated-symbol">
+                                <i class="fa fa-phone"></i>
+                            </span>
+                            <span class="bottom-border"></span>
+                        </div>
+
+                        <div class="form-data dob">
+                            <label for="dateOfBirth" class="form-label">Date of Birth</label>
+                            <input type="date" class="form-input" id="dateOfBirth" name="date_of_birth"
+                                value="{{userDob}}">
+                            <span class="animated-symbol">
+                                <i class="fa fa-calendar-days"></i>
+                            </span>
+                            <span class="bottom-border"></span>
+                        </div>
+
+                        <div class="form-data loc">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-input" id="address" name="address" value="{{userAddress}}">
+                            <span class="animated-symbol">
+                                <i class="fa fa-location-dot"></i>
+                            </span>
+                            <span class="bottom-border"></span>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Update Details</button>
+                    </form>
                 </div>
-                {{!-- <div class="advertise">
-                    <span class="ad-header">Total Invested</span>
-                    <span class="ad-body">500</span>
-                </div> --}}
-                <a class="book-btn" href="/book">Book Now
-                </a>
-            </div>
-
-            <div class="history-container">
-
-                <table class="history-table">
-                    <tr class="history-table-header">
-                        <th>Order Id</th>
-                        <th>Vehicle Type</th>
-                        <th>Vehicle Number</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Duration</th>
-                    </tr>
-                    {{#each bookingDetails}}
-                    <tr>
-                        <td>{{this.order_id}}</td>
-                        <td>{{this.vehicle_type}}</td>
-                        <td>{{this.vehicle_no}}</td>
-                        <td>{{this.date}}</td>
-                        <td>{{this.time}}</td>
-                        <td>{{this.duration}} Hour</td>
-                    </tr>
-                    {{/each}}
-                </table>
             </div>
         </div>
     </div>
-
-    <footer class="footer">
-        <div class="footer-container">
-
-            <a href="/">
-                <h1 class="footer-logo">ParkNow</h1>
-            </a>
-
-            <div class="footer-contact">
-
-                <h2 class="footer-title">Contact</h2>
-                <address>
-                    <p>ParkNow Team</p>
-                    <a class="footer-btn" href="mailto:sankha.roy.dev@gmail.com">Email Us</a>
-                </address>
-            </div>
-        </div>
-
-        <div class="footer-nav">
-
-            <div class="footer-item">
-
-                <h2 class="footer-title">Useful Links</h2>
-                <ul class="footer-list">
-                    <li>
-                        <a href="/">Pricing Details</a>
-                    </li>
-                    <li>
-                        <a href="/">Partnership</a>
-                    </li>
-                    <li>
-                        <a href="/">Raise a Complaint</a>
-                    </li>
-                    <li>
-                        <a href="/">Help</a>
-                    </li>
-                    <li>
-                        <a href="/">Support</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="footer-item">
-
-                <h2 class="footer-title">Admin</h2>
-                <ul class="footer-list">
-                    <li>
-                        <a href="/">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="/">Admin Profile</a>
-                    </li>
-                    <li>
-                        <a href="/">Affiliates</a>
-                    </li>
-                    <li>
-                        <a href="/">Resources</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="footer-item">
-
-                <h2 class="footer-title">Legal</h2>
-                <ul class="footer-list">
-                    <li>
-                        <a href="/">Privacy Policy</a>
-                    </li>
-                    <li>
-                        <a href="/">Terms and Conditions</a>
-                    </li>
-                    <li>
-                        <a href="/">Sitemap</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="footer-item">
-
-                <h2 class="footer-title">Social Media</h2>
-                <ul class="footer-list">
-                    <li>
-                        <a href="/">
-                            <i class="fa fa-twitter"></i> Twitter
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="">
-                            <i class="fa fa-linkedin-square"></i> LinkedIn
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/">
-                            <i class="fa fa-facebook-official"></i> Facebook
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/">
-                            <i class="fa fa-instagram"></i> Instagram
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa fa-github"></i> GitHub
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-
-        <div class="legal">
-            <p>&copy; 2023 ParkNow. All rights reserved.</p>
-
-            <div class="legal-links">
-                <span>Made by Sankhasubhra Roy</span>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const menuSwitch = document.querySelector('.menu-switch');
-        const menu = document.querySelector('.menu');
-
-        menuToggle.addEventListener('click', () => {
-            menu.classList.toggle('active');
-            menuToggle.classList.toggle('on');
-            menuSwitch.classList.toggle('on');
-        });
-
-        menuSwitch.addEventListener('click', () => {
-            menu.classList.toggle('active');
-            menuSwitch.classList.toggle('on');
-            menuToggle.classList.toggle('on');
-        })
-    </script>
 </body>
 
 </html>

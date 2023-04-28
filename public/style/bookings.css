@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  background: #f3f3f3;
+}
+
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 1140px;
+  margin: auto;
+  padding: 30px;
+}
+
+.responsive-table li {
+  border-radius: 4px;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.responsive-table .table-header {
+  background-color: #6c7ae0;
+  color: #f3f3f3;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  padding: 30px 30px;
+  transform: scale(1.009);
+}
+
+.responsive-table .table-row {
+  background-color: #fff;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+  transition: transform ease-out 0.3s;
+}
+
+.responsive-table .table-row:nth-child(odd) {
+  background-color: #e8ebff;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-table .table-row:hover {
+  transform: scale(1.009);
+}
+
+.responsive-table .table-row-expired {
+  font-family: 'Poppins', sans-serif;
+  color: #8d8d8d;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-table .col-1 {
+  flex-basis: 15%;
+}
+
+.responsive-table .col-2 {
+  flex-basis: 15%;
+}
+
+.responsive-table .col-3 {
+  flex-basis: 20%;
+}
+
+.responsive-table .col-4 {
+  flex-basis: 20%;
+}
+
+.responsive-table .col-5 {
+  flex-basis: 15%;
+}
+
+.responsive-table .col-6 {
+  flex-basis: 15%;
+}
+
+.responsive-table .col-7 {
+  flex-basis: 10%;
+}
+
+.responsive-table .col-8 {
+  flex-basis: 5%;
+}
+
+@media all and (max-width: 767px) {
+  .responsive-table .table-header {
+    display: none;
+  }
+
+  .responsive-table li {
+    display: block;
+  }
+
+  .responsive-table .table-row {
+    background-color: #8f9bf0;
+    color: #fff;
+  }
+
+  .responsive-table .table-row:nth-child(odd) {
+    background-color: #6c7ae0;
+    color: #f3f3f3;
+  }
+
+  .responsive-table .table-row-expired {
+    background-color: #eeeaeb;
+    color: #8d8d8d;
+  }
+
+  .responsive-table .col {
+    flex-basis: 100%;
+  }
+
+  .responsive-table .col {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 0;
+  }
+
+  .responsive-table .col:before {
+    font-weight: bold;
+    padding-right: 30px;
+    content: attr(data-label);
+    flex-basis: 30%;
+    text-align: right;
+  }
+}

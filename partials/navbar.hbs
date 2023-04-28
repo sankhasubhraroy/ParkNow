@@ -1,0 +1,47 @@
+<header>
+    <nav>
+        <div class="brand">
+            <a class="brand-text" href="/">ParkNow</a>
+        </div>
+
+        <div class="menu">
+            <ul class="menu-list">
+                <li>
+                    <a class="menu-link" href="/about">About</a>
+                </li>
+                <li>
+                    <a class="menu-link" href="/service">Service</a>
+                </li>
+                <li>
+                    <a class="menu-link" href="/contact">Contact</a>
+                </li>
+                <li>
+                    <a class="menu-link" href="/">Pricing</a>
+                </li>
+                {{#unless visibility}}
+                <li>
+                    <a class="menu-link" href="/login">Login</a>
+                </li>
+                <li>
+                    <a class="register-link" href="/register">Register</a>
+                </li>
+                {{/unless}}
+                {{#if visibility}}
+                <li>
+                    <a class="profile-link" href="/account">
+                        <i class="fa-regular fa-circle-user"></i>
+                    </a>
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+
+        <div class="menu-toggle on">
+            <i class="fa fa-bars"></i>
+        </div>
+
+        <div class="menu-switch">
+            <i class="fa fa-close"></i>
+        </div>
+    </nav>
+</header>

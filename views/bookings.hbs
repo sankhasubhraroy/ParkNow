@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/9f5e9c7e33.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/style/bookings.css">
+  <title>Bookings</title>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="container">
+      <ul class="responsive-table">
+        <li class="table-header">
+          <div class="col col-1">Booking Id</div>
+          <div class="col col-2">Vehicle Type</div>
+          <div class="col col-3">Vehicle No</div>
+          <div class="col col-4">Date</div>
+          <div class="col col-5">Time</div>
+          <div class="col col-6">Duration</div>
+          <div class="col col-7">Amount</div>
+          <div class="col col-8">Receipt</div>
+        </li>
+
+        {{#each bookingDetails}}
+        <li class="table-row">
+          <div class="col col-1" data-label="Booking Id">{{this.booking_id}}</div>
+          <div class="col col-2" data-label="Vehicle Type">{{this.vehicle_type}}</div>
+          <div class="col col-3" data-label="Vehicle No">{{this.vehicle_no}}</div>
+          <div class="col col-4" data-label="Date">{{this.date}}</div>
+          <div class="col col-5" data-label="Time">{{this.time}}</div>
+          <div class="col col-6" data-label="Duration">{{this.duration}} Hour</div>
+          <div class="col col-7" data-label="Amount">{{this.amount}} Rs</div>
+          <div class="col col-8" data-label="Receipt">
+            <a href="">
+              <i class="fa-solid fa-file-arrow-down"></i>
+            </a>
+          </div>
+        </li>
+        {{/each}}
+
+        {{#each expiredBookingDetails}}
+        <li class="table-row-expired">
+          <div class="col col-1" data-label="Booking Id">{{this.booking_id}}</div>
+          <div class="col col-2" data-label="Vehicle Type">{{this.vehicle_type}}</div>
+          <div class="col col-3" data-label="Vehicle No">{{this.vehicle_no}}</div>
+          <div class="col col-4" data-label="Date">{{this.date}}</div>
+          <div class="col col-5" data-label="Time">{{this.time}}</div>
+          <div class="col col-6" data-label="Duration">{{this.duration}} Hour</div>
+          <div class="col col-7" data-label="Amount">{{this.amount}} Rs</div>
+          <div class="col col-8" data-label="Receipt"><i class="fa-solid fa-file-arrow-down"></i></div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

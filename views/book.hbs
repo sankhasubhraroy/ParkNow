@@ -5,38 +5,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/style/payment.css">
     <link rel="stylesheet" href="/style/book.css">
-    <title>Book Your Park</title>
+    <title>Book Now</title>
 </head>
 
 <body>
-
-    <section class="parking-spot-booking">
-
-        <div class="back-btn">
-            <a href="/">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        </div>
-        <div class="booking-container">
-
-            <h2>Book Your Park</h2>
-
-            <div class="info-container">
-
-                <p>Per Hour -</p>
-                <p>Motorcycle = 50/-</p>
-                <p>Car = 100/-</p>
-                <p>Truck = 200/-</p>
+    <main class="main-container">
+        <section class="left">
+            <h2 class="heading">
+                Price Details
+            </h2>
+            <div class="block">
+                <p>Motorcycle
+                    <span class="price">₹ 50/
+                        <sub>hour</sub>
+                    </span>
+                </p>
             </div>
+            <div class="block">
+                <p>Car
+                    <span class="price">₹ 100/
+                        <sub>hour</sub>
+                    </span>
+                </p>
+            </div>
+            <div class="block">
+                <p>Truck
+                    <span class="price">₹ 200/
+                        <sub>hour</sub>
+                    </span>
+                </p>
+            </div>
+            <div class="block">
+                <span class="more-info">
+                    For both day and night price remains the same, If you want our parking service on monthly basis
+                    kindly feel free to contact us. If you exceed the checkout time there is penalty. For more details
+                    visit our pricing page.
+                </span>
+            </div>
+        </section>
 
+        <section class="right">
+            <h1>Book Your Park</h1>
             <form class="booking-form" action="/auth/book" method="POST">
 
-                <div class="form-field">
-
+                <div class="form-field form-field-radio">
                     <div class="radio-input">
                         <input type="radio" id="car" name="vehicleType" value="car">
                         <label for="car">Car</label>
@@ -52,26 +65,21 @@
                 </div>
 
                 <div class="form-field">
-
-                    <label for="vehicleNo" class="form-label-text">Enter Vehicle Number</label>
-                    <input type="text" class="form-control" id="vehicleNo" name="vehicleNo">
+                    <input type="text" class="form-control" id="vehicleNo" name="vehicleNo" oninput="vnoFunc()">
+                    <label for="vehicleNo" class="form-label-text form-label">Vehicle Number</label>
                 </div>
 
                 <div class="form-field">
-
-                    <label for="date" class="form-label">Date:</label>
-                    <input class="form-control" type="date" id="date" name="date">
+                    <input class="form-control" type="date" id="date" name="date" oninput="dateFunc()">
+                    <label for="date" class="form-label">Date</label>
                 </div>
 
                 <div class="form-field">
-
-                    <label for="time" class="form-label">Time:</label>
-                    <input class="form-control" type="time" id="time" name="time">
+                    <input class="form-control" type="time" id="time" name="time" oninput="timeFunc()">
+                    <label for="time" class="form-label">Time</label>
                 </div>
 
                 <div class="form-field">
-
-                    <label for="duration" class="form-label">Duration:</label>
                     <select class="form-control" id="duration" name="duration">
                         <option value="">Duration in Hour</option>
                         <option value="1">1 Hour</option>
@@ -87,39 +95,23 @@
                         <option value="11">11 Hours</option>
                         <option value="12">12 Hours</option>
                     </select>
+                    <label for="duration" class="form-label">Duration</label>
                 </div>
 
                 <div class="btn-container">
                     <button type="submit" class="form-btn">Book Now</button>
                 </div>
             </form>
-        </div>
-
-        {{#if payment}}
-        <!-- Payment Modal -->
-        <div class="modal-content">
-            <div class="logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Razorpay_logo.svg" alt="">
-            </div>
-
-            <div class="price">
-                <h1>{{amount}} <i class="fa fa-inr"></i></h1>
-            </div>
-
-            <a href="/profile" class="pay-link">
-                <button class="pay-btn">Pay</button>
-            </a>
-        </div>
-        {{/if}}
-
+        </section>
         {{#if message}}
         <div class="alert">
             <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
             {{message}}
         </div>
         {{/if}}
-    </section>
+    </main>
 
+    {{#if message}}
     <script>
         const closeButton = document.querySelector('.closebtn');
         const alertDiv = closeButton.parentElement;
@@ -127,6 +119,47 @@
         setTimeout(() => {
             alertDiv.style.display = 'none'
         }, 6000)
+    </script>
+    {{/if}}
+
+    <script>
+        const vno = document.getElementById('vehicleNo');
+        const date = document.getElementById('date');
+        const time = document.getElementById('time');
+        const duration = document.getElementById('duration');
+        function vnoFunc() {
+            if (vno.value) {
+                vno.parentElement.classList.add('active')
+            }
+            else {
+                vno.parentElement.classList.remove('active')
+            }
+        }
+        function dateFunc() {
+            if (date.value) {
+                date.parentElement.classList.add('active')
+            }
+            else {
+                date.parentElement.classList.remove('active')
+            }
+        }
+        function timeFunc() {
+            if (time.value) {
+                time.parentElement.classList.add('active')
+            }
+            else {
+                time.parentElement.classList.remove('active')
+            }
+        }
+
+        duration.addEventListener('change', () => {
+            if (duration.value) {
+                duration.parentElement.classList.add('active')
+            }
+            else {
+                duration.parentElement.classList.remove('active')
+            }
+        })
     </script>
 </body>
 

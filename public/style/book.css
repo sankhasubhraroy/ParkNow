@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
     margin: 0;
@@ -9,155 +8,197 @@
 }
 
 body {
-    font-family: 'Marcellus', serif;
-    background-color: #333;
-    color: #ffffffdc;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.5;
+    color: #333;
+    background: linear-gradient(#e6e6e6, #bbb);
 }
 
-.back-btn {
-    position: absolute;
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
 }
 
-.back-btn a {
-    color: #ffffff5f;
+.left {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    width: 120px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 3px #333333e2;
+    transition: transform .3s;
 }
 
-.back-btn a i {
-    padding: 10px 15px;
-    border-radius: 50%;
-    background-color: #ffffff44;
+.left:hover {
+    transform: scale(2.5);
 }
 
-.parking-spot-booking {
-    width: 100%;
-    padding: 50px;
-    background: url("https://images.unsplash.com/photo-1579372778680-604834b02240");
-    background-size: cover;
+.left:hover+.right {
+    transform: scale(0.5);
 }
 
-.booking-container {
-    width: fit-content;
-    margin: auto;
-    background: #2d343b;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+.left .heading {
+    margin: 10px 20px;
+    font-size: 8pt;
+    color: #f3f3f3;
+    text-transform: capitalize;
 }
 
-.booking-container h2 {
-    background-color: #1a1f24;
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
-    padding: 50px;
+.left .block {
+    padding: 10px 20px;
 }
 
-.info-container {
-    font-size: 1.5rem;
-    text-align: center;
-    padding: 20px 50px 0px;
+.left .block p {
+    display: flex;
+    justify-content: space-between;
+    color: #f3f3f3b9;
+    font-weight: 600;
+    font-size: 7px;
+    text-transform: capitalize;
+}
+
+.left .block .more-info {
+    display: flex;
+    font-size: 3pt;
+    color: #ffffff62;
+}
+
+.left .block .price sub {
+    font-weight: lighter;
+    font-size: 3pt;
+}
+
+.right {
+    padding: 40px;
+    background: linear-gradient(270deg, #e3ffe7 0%, #d9e7ff 100%);
+    font-family: 'Poppins', sans-serif;
+    border-radius: 10px;
+    box-shadow: 0px 0px 9px #33333349;
+    transition: transform .3s;
+}
+
+.right h1 {
+    margin-bottom: 30px;
 }
 
 .booking-form {
-    padding: 50px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .radio-input {
     display: inline-block;
-    margin-right: 30px;
-    font-size: larger;
-    font-weight: bold;
+    margin-right: 20px;
 }
 
 .radio-input input[type="radio"] {
-    height: 20px;
-    width: 20px;
-    accent-color: yellow;
+    accent-color: #00308f;
 }
 
 .form-field {
-    font-size: 18px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+}
+
+.form-field-radio {
+    margin-bottom: 40px;
+}
+
+.form-label {
+    position: relative;
+    bottom: 27px;
+    left: 20px;
+    color: #33333376;
+    transition: all ease-in 0.15s;
 }
 
 .form-control {
-    height: 50px;
+    height: 30px;
     width: 100%;
     display: block;
-    background-color: #1a1f24;
-    /* color: transparent; */
+    background-color: #ffffff2f;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    color: #333;
     padding: 0px 20px;
-    font-size: 18px;
-    border: 1px solid #2d343b;
-    color: #ffffff77;
-    font-family: 'Marcellus', serif;
-    font-size: larger;
-    font-weight: bold;
-    text-transform: uppercase;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0px 0px 4px #33333320;
 }
 
 .form-control:focus {
     outline: none;
 }
 
+.form-control:focus+.form-label {
+    bottom: 57px;
+    left: 2px;
+    color: #333;
+}
+
+.booking-form .form-field.active .form-label {
+    bottom: 57px;
+    left: 2px;
+    color: #333;
+}
+
+.booking-form .form-field:not(.active) .form-control:not( :focus) {
+    color: transparent;
+}
+
+
 .form-btn {
-    background-color: #f7c411;
+    background: rgb(63, 220, 251);
+    background: linear-gradient(90deg, rgba(63, 220, 251, 1) 0%, rgba(63, 251, 182, 1) 50%, rgba(63, 220, 251, 1) 100%);
+    background-size: 200% auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
     color: #1a1f24;
-    height: 50px;
-    padding: 10px 20px;
     text-transform: uppercase;
-    font-weight: bold;
-    font-size: 18px;
-    border: 1px solid #1a1f24;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-position 0.6s;
 }
 
 .form-btn:hover {
-    background-color: #ffd900a9;
+    background-position: right;
 }
 
 .alert {
     position: absolute;
-    left: 30%;
-    right: 30%;
+    bottom: 40px;
     padding: 10px;
     background-color: #f44336cc;
     color: white;
 }
 
-.price {
-    color: #333;
-}
-
-/* The close button */
 .closebtn {
-    padding: 5px;
+    padding: 4px 5px;
     margin-left: 10px;
+    border-radius: 15px;
     color: white;
     font-weight: bold;
     float: right;
     font-size: 22px;
     line-height: 15px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background-color linear 0.3s;
 }
 
-/* Responsive design for smaller screens */
+.closebtn:hover {
+    background-color: #ffffff44;
+    border-radius: 15px;
+}
 
-@media (max-width: 1023px) {
-    .back-btn a i {
-        border-radius: 0;
-        background-color: #ffffff19;
+@media screen and (max-width: 767px) {
+    .main-container {
+        flex-direction: column;
     }
 
-    .booking-container {
-        width: auto;
-    }
-
-    .alert {
-        left: 20%;
-        right: 20%;
+    .left {
+        display: none;
     }
 }

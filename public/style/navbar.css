@@ -1,6 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+@font-face {
+    font-family: DebraRounded-Bold;
+    src: url(/fonts/DebraRounded-Bold.otf);
+}
 
 * {
     margin: 0;
@@ -9,15 +13,16 @@
 }
 
 body {
-    font-family: 'Marcellus', serif;
+    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
     background-color: #f9f9f9;
     color: #333;
 }
 
 header {
-    width: auto;
-    background-color: #333;
-    color: #fff;
+    width: 100%;
+    background-color: transparent;
+    color: #333;
     padding: 5px;
 }
 
@@ -32,15 +37,10 @@ nav {
 }
 
 .brand-text {
-    font-family: 'Barriecito', cursive;
+    font-family: DebraRounded-Bold;
     font-size: x-large;
     text-decoration: none;
-    background-image: linear-gradient(-225deg,
-            #7322dd 0%,
-            #dd22b1 29%,
-            #dd6a22 67%,
-            #ddd722 100%);
-    background-size: auto auto;
+    background: linear-gradient(90deg, #FC466B 0%, #7527dc 50%, #FC466B 100%);
     background-clip: border-box;
     background-size: 200% auto;
     background-clip: text;
@@ -50,11 +50,7 @@ nav {
 }
 
 .brand-text:hover {
-    background-image: linear-gradient(-225deg,
-            #e7dff2 0%,
-            #7bd246 29%,
-            #dddd22 67%,
-            #6866d3 100%);
+    background: linear-gradient(90deg, #0700b8 0%, #00ff88 50%, #0700b8 100%);
     background-size: auto auto;
     background-clip: border-box;
     background-size: 200% auto;
@@ -75,49 +71,65 @@ nav {
     align-items: center;
     flex-wrap: wrap;
     list-style: none;
+    margin-right: 10px;
 }
 
 .menu-list li {
-    margin: 0 20px;
+    margin: 0 10px;
 }
 
 .menu-list .menu-link {
-    color: #fff;
+    color: #333;
     text-decoration: none;
-    padding: 10px;
-    /* border-radius: 10px; */
-    transition: background-color 0.3s ease-in;
+    font-weight: bold;
+    padding: 3px;
+    transition: color 0.2s ease-in;
 }
 
 .menu-list .menu-link:hover {
-    background-color: #ffffff2c;
-    transition: background-color 0.3s ease-out;
+    color: #073980;
 }
 
 .menu-list .menu-link:visited {
     background-color: #ffffff2c;
 }
 
-.menu-sp-link {
-    border: 1px solid #ffffff2c;
+.register-link {
+    background-color: #073980;
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 11px;
+    border-radius: 20px;
+    transition: background-color linear 0.2s;
+}
+
+.register-link:hover {
+    background-color: #011F5B;
 }
 
 .profile-link {
+    text-decoration: none;
+    font-size: xx-large;
+    color: #011F5B;
     display: flex;
-    align-items: center;
 }
 
-.profile-link img {
-    width: 40px;
-    height: 40px;
-    border: 3px solid #ffffff00;
-    border-radius: 40px;
-    transition: .3s;
+.profile-link:hover {
+    animation: tilt-shaking 0.45s;
 }
 
-.profile-link img:hover {
-    border: 3px solid #7cd246a1;
-    transition: .3s;
+@keyframes tilt-shaking {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(6deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 .menu-toggle,
@@ -149,7 +161,7 @@ nav {
     }
 
     .menu-list li {
-        margin: 20px 0px;
+        margin: 15px 0px;
     }
 
     .on {
@@ -161,13 +173,13 @@ nav {
 
     .on i {
         padding: 5px 7px;
-        color: #ffffffc5;
+        color: #333;
         border-radius: 50%;
-        transition: background-color .4s;
+        transition: background-color .3s;
     }
 
     .on i:hover {
-        background-color: #ffffff42;
+        background-color: #3333332d;
         border-radius: 50%;
         transition: background-color .4s;
     }

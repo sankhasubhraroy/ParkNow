@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
     margin: 0;
@@ -9,11 +8,11 @@
 }
 
 body {
-    font-family: 'Marcellus', serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     color: #333;
-    background-color: #f9f9f9;
+    background: #eeeaeb;
 }
 
 .container {
@@ -23,7 +22,7 @@ body {
 }
 
 .highlight {
-    background-image: url("https://images.unsplash.com/photo-1573348722427-f1d6819fdf98");
+    background: linear-gradient(135deg, rgba(90, 36, 122, 0.84) 0%, rgba(27, 207, 223, 0.842) 100%), url("https://images.unsplash.com/photo-1573348722427-f1d6819fdf98");
     background-size: cover;
     background-position: center;
     height: 600px;
@@ -33,17 +32,16 @@ body {
 }
 
 .highlight h1 {
-    font-family: 'Rowdies', cursive;
+    font-family: 'Poppins', sans-serif;
     font-size: 48px;
     color: #fff;
-    text-shadow: -20px 20px 5px#f9f9f918;
     text-align: center;
     margin-bottom: 20px;
 }
 
 .highlight p {
     font-size: 24px;
-    color: #ffffffe9;
+    color: #fff;
     text-align: center;
     margin-bottom: 40px;
 }
@@ -59,13 +57,12 @@ body {
     font-weight: bold;
     border-radius: 30px;
     text-decoration: none;
-    transition: background-color 1s;
+    transition: all .5s;
 }
 
 .book-button:hover {
     background-color: #e2c72b;
-    color: #0e0000;
-    transition: .5s;
+    color: #333;
 }
 
 .features {
@@ -73,7 +70,7 @@ body {
 }
 
 .features h2 {
-    font-family: 'Rowdies', cursive;
+    font-family: 'Poppins', sans-serif;
     font-size: 36px;
     font-weight: bold;
     color: #333;
@@ -82,22 +79,22 @@ body {
 }
 
 .feature-box {
-    background-color: #fff;
+    background: linear-gradient(0deg, #fffdf4 0%, #e8e8e8 100%);
     padding: 40px;
     text-align: center;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    transition-duration: 0.5s;
 }
 
 .feature-box:hover {
     transform: scale(1.05);
-    transition-duration: 0.5s;
 }
 
 .feature-box i {
     font-size: 48px;
-    color: #ff9933;
+    color: #034694;
     margin-bottom: 20px;
 }
 
@@ -115,12 +112,12 @@ body {
 }
 
 .testimonials {
-    background-color: #f9f9f9;
+    background: linear-gradient(180deg, #efd5ff 0%, #a5abff 100%);
     padding: 80px 0;
 }
 
 .testimonials h2 {
-    font-family: 'Rowdies', cursive;
+    font-family: 'Poppins', sans-serif;
     font-size: 36px;
     font-weight: bold;
     color: #333;
@@ -129,20 +126,22 @@ body {
 }
 
 .testimonial-box {
-    background-color: #fff;
+    background: linear-gradient(180deg, #f4f6ff 0%, #d2e2ff 100%);
     padding: 40px;
     text-align: center;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    transition-duration: 0.5s;
 }
 
 .testimonial-box:hover {
     transform: scale(1.05);
-    transition-duration: 0.5s;
 }
 
 .testimonial-box p {
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
     font-size: 24px;
     color: #666;
     margin-bottom: 20px;
@@ -153,6 +152,10 @@ body {
     font-weight: bold;
     color: #333;
     margin-bottom: 0;
+}
+
+footer {
+    font-family: 'Poppins', sans-serif;
 }
 
 @media (max-width: 768px) {

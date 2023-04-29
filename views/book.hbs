@@ -5,11 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/navbar.css">
+    <link rel="stylesheet" href="/style/footer.css">
     <link rel="stylesheet" href="/style/book.css">
     <title>Book Now</title>
 </head>
 
 <body>
+
+    {{>navbar}}
+
     <main class="main-container">
         <section class="left">
             <h2 class="heading">
@@ -110,6 +115,8 @@
         </div>
         {{/if}}
     </main>
+
+    {{>footer}}
 
     {{#if message}}
     <script>

@@ -112,6 +112,10 @@ router.get('/service', (req, res) => {
     res.render('service')
 })
 
+router.get('/pricing', (req, res) => {
+    res.render('pricing')
+})
+
 
 //Admin Routs
 router.get('/admin/register', adminController.isAdminLoggedIn, (req, res) => {

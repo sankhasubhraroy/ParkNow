@@ -260,15 +260,20 @@ exports.verify = (req, res) => {
     const generated_signature = hmac.digest('hex');
 
     if (razorpay_signature === generated_signature) {
-        console.log('success');
 
-        db.query('INSERT INTO bookings SET ?', { vehicle_type: vehicleType, vehicle_no: vehicleNo, date: date, time: time, duration: duration, amount: amount, payment_id: razorpay_payment_id, id: id }, (err, result) => {
-
+        db.query('INSERT INTO bookings SET ?', { vehicle_type: vehicleType, vehicle_no: vehicleNo, date: date, time: time, duration: duration, id: id }, (err, result) => {
             if (err) {
                 console.log(err);
             }
             else {
-                // res.render('confirmation');
+                db.query('INSERT INTO payments SET ?', { order_id: razorpay_order_id, payment_id: razorpay_payment_id, amount: amount, id: id }, (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    else {
+                        console.log("payment and booking successful");
+                    }
+                })
             }
         });
     }

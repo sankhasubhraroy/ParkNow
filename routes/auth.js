@@ -16,5 +16,6 @@ router.post('/admin/register', adminController.adminRegister);
 router.post('/admin/login', adminController.adminLogin);
 router.get('/admin/logout', adminController.adminLogout);
 router.get('/admin/delete-booking-history', adminController.deleteBookingHistory);
+router.get('/admin/delete-user', adminController.deleteUser);
 
 module.exports = router;

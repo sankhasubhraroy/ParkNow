@@ -141,47 +141,133 @@ exports.adminLogout = async (req, res) => {
 
 exports.adminDashboard = async (req, res, next) => {
 
-    if (req.cookies.adminSave) {
-        db.query('SELECT * FROM bookings JOIN users ON bookings.id = users.id;', (err, result) => {
-            if (err) {
-                console.log(err);
-            }
-            else {
-                req.bookings = result;
-                return next();
-            }
-        })
-    }
-    else {
-        return next();
-    }
+    db.query('SELECT SUM(amount) AS totalRevenue FROM payments', (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            const totalRevenue = result[0].totalRevenue;
+
+            db.query('SELECT COUNT(booking_id) AS totalBookings FROM bookings WHERE status = "active"', (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    const totalBookings = result[0].totalBookings;
+
+                    db.query('SELECT COUNT(booking_id) AS totalExpiredBookings FROM bookings WHERE status = "expired"', (err, result) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        else {
+                            const totalExpiredBookings = result[0].totalExpiredBookings;
+
+                            db.query('SELECT COUNT(id) AS totalCustomers FROM users', (err, result) => {
+                                if (err) {
+                                    console.log(err);
+                                }
+                                else {
+                                    const totalCustomers = result[0].totalCustomers;
+                                    req.dashboardDetails = {
+                                        totalRevenue,
+                                        totalBookings,
+                                        totalExpiredBookings,
+                                        totalCustomers
+                                    }
+                                    return next();
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+}
+
+exports.activeBookings = async (req, res, next) => {
+
+    db.query('SELECT * FROM bookings JOIN users ON bookings.id = users.id WHERE status = "active" ORDER BY date DESC', (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            req.bookings = result;
+            return next();
+        }
+    })
+}
+
+exports.expiredBookings = async (req, res, next) => {
+
+    db.query('SELECT * FROM bookings JOIN users ON bookings.id = users.id WHERE status = "expired" ORDER BY date DESC', (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            req.expiredBookings = result;
+            return next();
+        }
+    })
+}
+
+exports.customers = (req, res, next) => {
+
+    db.query('SELECT * FROM users', (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            req.customers = result;
+            return next();
+        }
+    })
+}
+
+exports.payments = (req, res, next) => {
+
+    db.query('SELECT payments.order_id, payments.payment_id, payments.amount, users.name FROM payments, users WHERE payments.id = users.id', (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            req.payments = result;
+
+            db.query('SELECT SUM(amount) AS totalAmount, AVG(amount) AS avgAmount, MAX(amount) AS maxAmount FROM payments', (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    req.stats = result[0];
+                    return next();
+                }
+            })
+        }
+    })
 }
 
 exports.deleteBookingHistory = (req, res) => {
     console.log(req.query.booking_id);
 
-    db.query('SELECT * FROM bookings WHERE booking_id = ?', [req.query.booking_id], (err, result) => {
+    db.query('UPDATE bookings SET status = "expired" WHERE booking_id = ?', [req.query.booking_id], (err, result) => {
         if (err) {
             console.log(err);
         }
         else {
-            const { booking_id, vehicle_type, vehicle_no, date, time, duration, amount, payment_id, id } = result[0];
+            res.redirect('/admin/dashboard/active-bookings');
+        }
+    });
+}
 
-            db.query('INSERT INTO expired_bookings SET ?', { booking_id, vehicle_type, vehicle_no, date, time, duration, amount, payment_id, id }, (err, result) => {
-                if (err) {
-                    console.log(err);
-                }
-                else {
-                    db.query('DELETE FROM bookings WHERE booking_id = ?', [booking_id], (err, result) => {
-                        if (err) {
-                            console.log(err);
-                        }
-                        else {
-                            res.redirect('/admin/dashboard');
-                        }
-                    });
-                }
-            });
+exports.deleteUser = (req, res) => {
+    console.log(req.query.id);
+
+    db.query('DELETE FROM users WHERE id = ?', [req.query.id], (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.redirect('/admin/dashboard/customers');
         }
     });
 }

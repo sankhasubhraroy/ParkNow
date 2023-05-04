@@ -85,73 +85,119 @@ router.get('/account/bookings', authController.isLoggedIn, authController.bookin
         res.render('bookings', {
             bookingDetails,
             expiredBookingDetails
-        })
+        });
     }
     else {
-        res.redirect('/login')
+        res.redirect('/login');
     }
 })
 
 router.get('/book', authController.isLoggedIn, (req, res) => {
     if (req.user) {
-        res.render('book')
+        res.render('book');
     } else {
-        res.redirect('/login')
+        res.redirect('/login');
     }
 })
 
 router.get('/contact', (req, res) => {
-    res.render('contact')
+    res.render('contact');
 })
 
 router.get('/about', (req, res) => {
-    res.render('about')
+    res.render('about');
 })
 
 router.get('/service', (req, res) => {
-    res.render('service')
+    res.render('service');
 })
 
 router.get('/pricing', (req, res) => {
-    res.render('pricing')
+    res.render('pricing');
 })
 
 
 //Admin Routs
-router.get('/admin/register', adminController.isAdminLoggedIn, (req, res) => {
-    if (req.admin) {
-        res.redirect('/admin/dashboard')
-    } else {
-        res.render('adminRegister')
-    }
-})
-
 router.get('/admin/login', adminController.isAdminLoggedIn, (req, res) => {
     if (req.admin) {
         res.redirect('/admin/dashboard')
     } else {
-        res.render('adminLogin')
+        res.render('adminLogin');
     }
 })
 
 router.get('/admin/dashboard', adminController.isAdminLoggedIn, adminController.adminDashboard, (req, res) => {
 
-    const bookingHistory = req.bookings;
-    bookingHistory.map(booking => {
-        const dateData = booking.date.toString().split(" ");
-        booking.date = dateData[2] + " " + dateData[1] + " " + dateData[3];
-    })
-
     if (req.admin) {
+
         res.render('adminDashboard', {
-            adminId: req.admin.admin_id,
-            adminName: req.admin.admin_name,
-            adminEmail: req.admin.admin_email,
-            bookingHistory,
-            totalBookings: bookingHistory.length
+            revenue: req.dashboardDetails.totalRevenue,
+            bookings: req.dashboardDetails.totalBookings,
+            expired_bookings: req.dashboardDetails.totalExpiredBookings,
+            customers: req.dashboardDetails.totalCustomers
         })
     } else {
-        res.redirect('/admin/login')
+        res.redirect('/admin/login');
+    }
+})
+
+router.get('/admin/dashboard/active-bookings', adminController.isAdminLoggedIn, adminController.activeBookings, (req, res) => {
+
+    if (req.admin) {
+        const bookingHistory = req.bookings;
+        bookingHistory.map(booking => {
+            const dateData = booking.date.toString().split(" ");
+            booking.date = dateData[2] + " " + dateData[1] + " " + dateData[3];
+        })
+
+        res.render('activeBookings', {
+            bookingHistory
+        })
+    } else {
+        res.redirect('/admin/login');
+    }
+})
+
+router.get('/admin/dashboard/expired-bookings', adminController.isAdminLoggedIn, adminController.expiredBookings, (req, res) => {
+
+    if (req.admin) {
+        const expiredBookingHistory = req.expiredBookings;
+        expiredBookingHistory.map(booking => {
+            const dateData = booking.date.toString().split(" ");
+            booking.date = dateData[2] + " " + dateData[1] + " " + dateData[3];
+        })
+
+        res.render('expiredBookings', {
+            expiredBookingHistory
+        })
+    } else {
+        res.redirect('/admin/login');
+    }
+})
+
+router.get('/admin/dashboard/customers', adminController.isAdminLoggedIn, adminController.customers, (req, res) => {
+
+    if (req.admin) {
+        const customerDetails = req.customers;
+        customerDetails.map(dob => {
+            const dateData = dob.date_of_birth.toString().split(" ");
+            dob.date_of_birth = dateData[2] + " " + dateData[1] + " " + dateData[3];
+        })
+
+        res.render('customers', { customerDetails });
+    } else {
+        res.redirect('/admin/login');
+    }
+})
+
+router.get('/admin/dashboard/payments', adminController.isAdminLoggedIn, adminController.payments, (req, res) => {
+
+    if (req.admin) {
+        const revenues = req.payments;
+        const stats = req.stats;
+        res.render('revenues', { revenues, stats });
+    } else {
+        res.redirect('/admin/login');
     }
 })
 

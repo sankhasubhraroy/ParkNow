@@ -1,58 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-main {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.dashboard-card {
-    background-color: #f1f1f1;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.dashboard-card h2 {
-    margin-top: 0;
-}
-
-.dashboard-card ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.dashboard-card li {
-    margin: 10px 0;
-}
-
-.dashboard-card li span {
-    font-weight: bold;
-}
-
-table {
+    color: #99a0b0;
     width: 100%;
-
-    /* border-collapse: */
+    height: 100%;
+    background: #f5f5fa;
+    font-size: 16px;
+    line-height: 120%;
+    font-family: sans-serif;
 }
 
-table th,
-table td {
-    padding: 10px;
-    text-align: left;
+.content-wrap {
+    padding: 3em;
+    overflow: auto;
 }
 
-table th {
-    background-color: #333;
-    color: #fff;
+.content-head h1 {
+    line-height: 100%;
+    color: #1b253d;
+    font-weight: 500;
 }
 
-table tbody tr:nth-child(odd) {
-    background-color: #f1f1f1;
+.info-boxes {
+    padding: 3em 0em;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-gap: 2em;
+}
+
+.info-box {
+    text-decoration: none;
+    background: #fff;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 3em;
+    border: 1px solid #ede8f0;
+    border-radius: 5px;
+    box-shadow: 0px 1px 3px #1b253d2a;
+    transition: transform 0.3s ease;
+}
+
+.box-icon i {
+    font-size: 3.5em;
+    color: #99a0b0;
+    transition: color 0.3s ease;
+}
+
+.box-content {
+    color: #4b84fe;
+    padding-left: 1.25em;
+    white-space: nowrap;
+}
+
+.big {
+    display: block;
+    font-size: 2em;
+    line-height: 150%;
+    color: #1b253d;
+}
+
+.info-box:hover {
+    transform: scale(1.01);
+}
+
+.info-box:hover .box-icon i {
+    color: #4b84fe;
+}
+
+@media screen and (max-width:375px) {
+    .content-wrap {
+        padding: 20px;
+    }
+
+    .info-boxes {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .info-box {
+        padding: 20px;
+    }
 }

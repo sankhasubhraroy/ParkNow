@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" class="antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script src="https://kit.fontawesome.com/9f5e9c7e33.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style/menu.css">
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
+    <!--Regular Datatables CSS-->
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!--Responsive Extension Datatables CSS-->
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+    <title>Active Bookings</title>
+    <style>
+        .dataTables_wrapper select,
+        .dataTables_wrapper .dataTables_filter input {
+            color: #4a5568;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: .5rem;
+            padding-bottom: .5rem;
+            line-height: 1.25;
+            border-width: 2px;
+            border-radius: .25rem;
+            border-color: #edf2f7;
+            background-color: #edf2f7;
+        }
+
+        table.dataTable.hover tbody tr:hover,
+        table.dataTable.display tbody tr:hover {
+            background-color: #ebf4ff;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            font-weight: 700;
+            border-radius: .25rem;
+            border: 1px solid transparent;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            color: #fff !important;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+            font-weight: 700;
+            border-radius: .25rem;
+            background: #667eea !important;
+            border: 1px solid transparent;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            color: #fff !important;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+            font-weight: 700;
+            border-radius: .25rem;
+            background: #667eea !important;
+            border: 1px solid transparent;
+        }
+
+        table.dataTable.no-footer {
+            border-bottom: 1px solid #e2e8f0;
+            margin-top: 0.75em;
+            margin-bottom: 0.75em;
+        }
+
+        table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
+        table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+            background-color: #667eea !important;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
+
+    {{>menu}}
+
+    <div class="main-container flex items-center justify-center">
+
+        <div class="container w-full md:w-4/5 xl:w-3/5 m-8 px-2">
+
+            <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+
+                <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Booking Id</th>
+                            <th data-priority="2">Vehicle No</th>
+                            <th data-priority="3">Vehicle Type</th>
+                            <th data-priority="4">Name</th>
+                            <th data-priority="5">Date</th>
+                            <th data-priority="6">Time</th>
+                            <th data-priority="7">Duration</th>
+                            <th data-priority="8">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each bookingHistory}}
+                        <tr>
+                            <td>{{this.booking_id}}</td>
+                            <td>{{this.vehicle_no}}</td>
+                            <td>{{this.vehicle_type}}</td>
+                            <td>{{this.name}}</td>
+                            <td>{{this.date}}</td>
+                            <td>{{this.time}}</td>
+                            <td>{{this.duration}} Hour</td>
+                            <td>
+                                <a href="/auth/admin/delete-booking-history?booking_id={{this.booking_id}}">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                            {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            var table = $('#example').DataTable({
+                responsive: true
+            })
+                .columns.adjust()
+                .responsive.recalc();
+        });
+    </script>
+</body>
+
+</html>

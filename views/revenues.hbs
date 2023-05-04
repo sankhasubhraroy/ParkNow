@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/menu.css">
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
+    <title>Expired Bookings</title>
+</head>
+
+<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
+
+    {{>menu}}
+    <section class="py-1">
+        <div class="mx-auto mb-12 mt-24 w-full px-4 xl:mb-0 xl:w-8/12">
+            <div class="mx-4 max-w-full py-6 sm:mx-auto sm:px-6 lg:px-8">
+                <div class="sm:flex sm:space-x-4">
+                    <div
+                        class="mb-4 inline-block w-full transform overflow-hidden rounded bg-white text-left align-bottom shadow transition-all sm:my-8 sm:w-1/3">
+                        <div class="bg-white p-5">
+                            <div class="sm:flex sm:items-start">
+                                <div class="text-center sm:ml-2 sm:mt-0 sm:text-left">
+                                    <h3 class="text-sm font-medium leading-6 text-gray-400">Total Revenue</h3>
+                                    <p class="text-3xl font-bold text-black">{{stats.totalAmount}} ₹</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="mb-4 inline-block w-full transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow transition-all sm:my-8 sm:w-1/3">
+                        <div class="bg-white p-5">
+                            <div class="sm:flex sm:items-start">
+                                <div class="text-center sm:ml-2 sm:mt-0 sm:text-left">
+                                    <h3 class="text-sm font-medium leading-6 text-gray-400">Average Revenue</h3>
+                                    <p class="text-3xl font-bold text-black">{{stats.avgAmount}} ₹</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="mb-4 inline-block w-full transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow transition-all sm:my-8 sm:w-1/3">
+                        <div class="bg-white p-5">
+                            <div class="sm:flex sm:items-start">
+                                <div class="text-center sm:ml-2 sm:mt-0 sm:text-left">
+                                    <h3 class="text-sm font-medium leading-6 text-gray-400">Highest Payment</h3>
+                                    <p class="text-3xl font-bold text-black">{{stats.maxAmount}} ₹</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative mb-6 flex w-full min-w-0 flex-col break-words rounded bg-white shadow">
+                <div class="block w-full overflow-x-auto">
+                    <table class="w-full border-collapse items-center bg-transparent">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="bg-gray-50 text-gray-400 border-gray-100 whitespace-nowrap border-b border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-bold uppercase">
+                                    Order Id</th>
+                                <th
+                                    class="bg-gray-50 text-gray-400 border-gray-100 whitespace-nowrap border-b border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-bold uppercase">
+                                    Payment Id</th>
+                                <th
+                                    class="bg-gray-50 text-gray-400 border-gray-100 whitespace-nowrap border-b border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-bold uppercase">
+                                    Amount</th>
+                                <th
+                                    class="bg-gray-50 text-gray-400 border-gray-100 whitespace-nowrap border-b border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-bold uppercase">
+                                    Customer Name</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {{#each revenues}}
+                            <tr>
+                                <td
+                                    class="text-gray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs">
+                                    {{this.order_id}}</td>
+                                <td
+                                    class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+                                    {{this.payment_id}}</td>
+                                <td
+                                    class="align-center whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-xs font-bold">
+                                    {{this.amount}} ₹</td>
+                                <td
+                                    class="align-center whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-xs">
+                                    {{this.name}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

@@ -3,68 +3,73 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Admin - Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/9f5e9c7e33.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style/menu.css">
     <link rel="stylesheet" href="/style/adminDashboard.css">
+    <title>Dashboard</title>
 </head>
 
 <body>
-    <header>
 
-    </header>
-    <main>
-        <h1>Welcome to Your Dashboard, {{adminName}}</h1>
-        <div class="dashboard-card">
-            <h2>Admin Account</h2>
-            <ul>
-                <li><span>Id:</span> {{adminId}}</li>
-                <li><span>Name:</span> {{adminName}}</li>
-                <li><span>Email:</span> {{adminEmail}}</li>
-                <li><span>Total Bookings:</span> {{totalBookings}}</li>
-                {{!-- <li><span>Phone:</span> 555-555-5555</li> --}}
-                {{!-- <li><span>Address:</span> 123 Main St, Anytown USA</li> --}}
-            </ul>
-        </div>
-        <div class="dashboard-card">
-            <h2>All Bookings</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Customer Id</th>
-                        <th>Customer Name</th>
-                        <th>Vehicle Type</th>
-                        <th>Vehicle No</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Duration</th>
-                        <th>Booking Id</th>
-                        <th>Action</th>
-                        {{!-- <th>Price</th> --}}
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each bookingHistory}}
-                    <tr>
-                        <td>{{this.id}}</td>
-                        <td>{{this.name}}</td>
-                        <td>{{this.vehicle_type}}</td>
-                        <td>{{this.vehicle_no}}</td>
-                        <td>{{this.date}}</td>
-                        <td>{{this.time}}</td>
-                        <td>{{this.duration}}</td>
-                        <td>{{this.booking_id}}</td>
-                        <td><a href="/auth/admin/delete-booking-history?booking_id={{this.booking_id}}"><i
-                                    class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
-        </div>
-    </main>
-    <footer>
+    {{>menu}}
 
-    </footer>
+    <section class="dashboard">
+        <div class="content-wrap">
+            <div class="content-head">
+                <h1>Admin Dashboard</h1>
+            </div>
+
+            <div class="content">
+                <div class="info-boxes">
+                    <a href="/admin/dashboard/payments" class="info-box">
+                        <div class="box-icon">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+
+                        <div class="box-content">
+                            <span class="big">{{revenue}} ₹</span>
+                            Total Revenue
+                        </div>
+                    </a>
+
+                    <a href="/admin/dashboard/active-bookings" class="info-box">
+                        <div class="box-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+
+                        <div class="box-content">
+                            <span class="big">{{bookings}}</span>
+                            Active Bookings
+                        </div>
+                    </a>
+
+                    <a href="/admin/dashboard/expired-bookings" class="info-box active">
+                        <div class="box-icon">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+
+                        <div class="box-content">
+                            <span class="big">{{expired_bookings}}</span>
+                            Expired Bookings
+                        </div>
+                    </a>
+
+                    <a href="/admin/dashboard/customers" class="info-box">
+                        <div class="box-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <div class="box-content">
+                            <span class="big">{{customers}}</span>
+                            Customers
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>

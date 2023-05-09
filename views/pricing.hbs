@@ -3,200 +3,118 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>CodePen - Bootstrap Pricing Table</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-    <link rel="stylesheet" href="/style/navbar.css">
+    <script src="https://kit.fontawesome.com/9f5e9c7e33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style/footer.css">
+    <link rel="stylesheet" href="/style/navbar.css">
     <link rel="stylesheet" href="/style/pricing.css">
-
+    <title>Pricing</title>
 </head>
 
 <body>
 
     {{>navbar}}
 
-    <div id="generic_price_table">
-        <section>
-            <div class="container">
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
 
-                <div class="row">
-                    <div class="col-md-4">
-
-                        <div class="generic_content clearfix">
-
-                            <div class="generic_head_price clearfix">
-
-                                <div class="generic_head_content clearfix">
-
-                                    <!--HEAD START-->
-                                    <div class="head_bg"></div>
-                                    <div class="head">
-                                        <span>motorcycle</span>
-                                    </div>
-
-                                </div>
-
-                                <div class="generic_price_tag clearfix">
-                                    <span class="price">
-                                        <span class="sign">₹</span>
-                                        <span class="currency">50</span>
-                                        <span class="cent">.00</span>
-                                        <span class="month">/Hour</span>
-                                    </span>
-                                </div>
-                                <!--//PRICE END-->
-
+                <div class="price-card">
+                    <div class="card-head">
+                        <div class="card-head-content">
+                            <div class="head-bg"></div>
+                            <div class="head">
+                                <i class="fa-solid fa-motorcycle"></i>
                             </div>
-                            <!--//HEAD PRICE DETAIL END-->
-
-                            <!--FEATURE LIST START-->
-                            <!-- <div class="generic_feature_list">
-                                <ul>
-                                    <li><span>2GB</span> Bandwidth</li>
-                                    <li><span>150GB</span> Storage</li>
-                                    <li><span>12</span> Accounts</li>
-                                    <li><span>7</span> Host Domain</li>
-                                    <li><span>24/7</span> Support</li>
-                                </ul>
-                            </div> -->
-                            <!--//FEATURE LIST END-->
-
-                            <!--BUTTON START-->
-                            <div class="generic_price_btn clearfix">
-                                <a class="" href="">book now</a>
-                            </div>
-                            <!--//BUTTON END-->
-
                         </div>
-                        <!--//PRICE CONTENT END-->
-
+                        <div class="card-head-price">
+                            <span class="price">
+                                <span class="sign">₹</span>
+                                <span class="currency">50</span>
+                                <span class="hour">/Hour</span>
+                            </span>
+                        </div>
                     </div>
-
-                    <div class="col-md-4">
-
-                        <!--PRICE CONTENT START-->
-                        <div class="generic_content active clearfix">
-
-                            <!--HEAD PRICE DETAIL START-->
-                            <div class="generic_head_price clearfix">
-
-                                <!--HEAD CONTENT START-->
-                                <div class="generic_head_content clearfix">
-
-                                    <!--HEAD START-->
-                                    <div class="head_bg"></div>
-                                    <div class="head">
-                                        <span>car</span>
-                                    </div>
-                                    <!--//HEAD END-->
-
-                                </div>
-                                <!--//HEAD CONTENT END-->
-
-                                <!--PRICE START-->
-                                <div class="generic_price_tag clearfix">
-                                    <span class="price">
-                                        <span class="sign">₹</span>
-                                        <span class="currency">100</span>
-                                        <span class="cent">.00</span>
-                                        <span class="month">/Hour</span>
-                                    </span>
-                                </div>
-                                <!--//PRICE END-->
-
-                            </div>
-                            <!--//HEAD PRICE DETAIL END-->
-
-                            <!--FEATURE LIST START-->
-                            <!-- <div class="generic_feature_list">
-                                <ul>
-                                    <li><span>2GB</span> Bandwidth</li>
-                                    <li><span>150GB</span> Storage</li>
-                                    <li><span>12</span> Accounts</li>
-                                    <li><span>7</span> Host Domain</li>
-                                    <li><span>24/7</span> Support</li>
-                                </ul>
-                            </div> -->
-                            <!--//FEATURE LIST END-->
-
-                            <!--BUTTON START-->
-                            <div class="generic_price_btn clearfix">
-                                <a class="" href="">book now</a>
-                            </div>
-                            <!--//BUTTON END-->
-
-                        </div>
-                        <!--//PRICE CONTENT END-->
-
+                    <div class="card-body">
+                        <ul>
+                            <li>Total 500 parking spaces</li>
+                            <li>Online Booking and payment</li>
+                            <li>24/7 customer support</li>
+                            <li>Full CCTV surveillance</li>
+                        </ul>
                     </div>
-                    <div class="col-md-4">
-
-                        <!--PRICE CONTENT START-->
-                        <div class="generic_content clearfix">
-
-                            <!--HEAD PRICE DETAIL START-->
-                            <div class="generic_head_price clearfix">
-
-                                <!--HEAD CONTENT START-->
-                                <div class="generic_head_content clearfix">
-
-                                    <!--HEAD START-->
-                                    <div class="head_bg"></div>
-                                    <div class="head">
-                                        <span>Truck</span>
-                                    </div>
-                                    <!--//HEAD END-->
-
-                                </div>
-                                <!--//HEAD CONTENT END-->
-
-                                <!--PRICE START-->
-                                <div class="generic_price_tag clearfix">
-                                    <span class="price">
-                                        <span class="sign">₹</span>
-                                        <span class="currency">200</span>
-                                        <span class="cent">.00</span>
-                                        <span class="month">/Hour</span>
-                                    </span>
-                                </div>
-                                <!--//PRICE END-->
-
-                            </div>
-                            <!--//HEAD PRICE DETAIL END-->
-
-                            <!--FEATURE LIST START-->
-                            <!-- <div class="generic_feature_list">
-                                <ul>
-                                    <li><span>2GB</span> Bandwidth</li>
-                                    <li><span>150GB</span> Storage</li>
-                                    <li><span>12</span> Accounts</li>
-                                    <li><span>7</span> Host Domain</li>
-                                    <li><span>24/7</span> Support</li>
-                                </ul>
-                            </div> -->
-                            <!--//FEATURE LIST END-->
-
-                            <!--BUTTON START-->
-                            <div class="generic_price_btn clearfix">
-                                <a class="" href="">book now</a>
-                            </div>
-                            <!--//BUTTON END-->
-
-                        </div>
-                        <!--//PRICE CONTENT END-->
-
+                    <div class="card-btn">
+                        <a class="" href="/book">Book now</a>
                     </div>
                 </div>
-                <!--//BLOCK ROW END-->
 
+                <div class="price-card active">
+                    <div class="card-head">
+                        <div class="card-head-content">
+                            <div class="head-bg"></div>
+                            <div class="head">
+                                <i class="fa-solid fa-car"></i>
+                            </div>
+                        </div>
+                        <div class="card-head-price">
+                            <span class="price">
+                                <span class="sign">₹</span>
+                                <span class="currency">100</span>
+                                <span class="hour">/Hour</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Total 100 parking spaces</li>
+                            <li>Online Booking and payment</li>
+                            <li>24/7 customer support</li>
+                            <li>Monthly rent available</li>
+                            <li>Full CCTV surveillance</li>
+                        </ul>
+                    </div>
+                    <div class="card-btn ">
+                        <a class="" href="/book">Book now</a>
+                    </div>
+                </div>
+
+                <div class="price-card">
+                    <div class="card-head">
+                        <div class="card-head-content">
+                            <div class="head-bg"></div>
+                            <div class="head">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </div>
+                        </div>
+                        <div class="card-head-price">
+                            <span class="price">
+                                <span class="sign">₹</span>
+                                <span class="currency">200</span>
+                                <span class="hour">/Hour</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Total 50 parking spaces</li>
+                            <li>Online Booking and payment</li>
+                            <li>24/7 customer support</li>
+                            <li>Yearly rent available</li>
+                            <li>Full CCTV surveillance</li>
+                            <li>Mechanic available</li>
+                        </ul>
+                    </div>
+                    <div class="card-btn">
+                        <a class="" href="/book">Book now</a>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        {{>footer}}
+    {{>footer}}
 
-    </div>
+    <script src="/script/navbar.js"></script>
 
 </body>
 

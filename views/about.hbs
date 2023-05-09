@@ -16,87 +16,59 @@
 
     {{>navbar}}
 
-    <div class="about-section">
-        <h1>About Us</h1>
-        <p>We are happy to make this project for you</p>
-        <p>If you have any queries you can contact any of us</p>
-    </div>
-
-    <h2 style="text-align:center">Our Team</h2>
-    <div class="row">
-
-        <div class="column">
-            <div class="card">
-                {{!-- <img src="/avatar.png" alt="Jane" style="width:100%"> --}}
-                <div class="container">
-                    <h2>Sankhasubhra Roy</h2>
-                    {{!-- <p class="title">Full Stack Developer</p> --}}
-                    {{!-- <p>Some text that describes me lorem ipsum ipsum lorem.</p> --}}
-                    <p>sankha.asansol@gmail.com</p>
-                    <p><button class="button">Contact</button></p>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="about-card">
+                    <div class="our-team">
+                        <div class="picture">
+                            <img class="img-fluid" src="https://avatars.githubusercontent.com/u/102174247">
+                        </div>
+                        <div class="team-content">
+                            <h3 class="name">Sankhasubhra Roy</h3>
+                            <h4 class="title">Full Stack Developer</h4>
+                        </div>
+                        <ul class="social">
+                            <li><a href="https://www.linkedin.com/in/sankhasubhraroy/" class="fa-brands fa-linkedin"
+                                    aria-hidden="true" target="_blank"></a>
+                            </li>
+                            <li><a href="https://github.com/sankhasubhraroy" class="fa-brands fa-github"
+                                    aria-hidden="true" target="_blank"></a>
+                            </li>
+                            <li><a href="https://twitter.com/sankha__roy" class="fa-brands fa-twitter"
+                                    aria-hidden="true" target="_blank"></a>
+                            </li>
+                            <li><a href="https://www.instagram.com/sankha__roy/" class="fa-brands fa-instagram"
+                                    aria-hidden="true" target="_blank"></a>
+                            </li>
+                            <li><a href="https://www.facebook.com/profile.php?id=100004799925997"
+                                    class="fa-brands fa-facebook" aria-hidden="true" target="_blank"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="about-section">
+                    <h1>About Us</h1>
+                    <p>
+                        We are a team of passionate professionals committed to providing the best parking management
+                        solutions for our clients.
+                        With years of experience in the industry, we have the expertise to tackle any parking challenge,
+                        big or small. Our
+                        mission is to make parking easy, convenient, and stress-free for everyone. We believe that
+                        efficient parking management
+                        is essential for the smooth functioning of any business or organization, and we are dedicated to
+                        delivering the highest
+                        quality service to our clients. Get in touch with us today to learn more about how we can help
+                        you manage your parking
+                        needs.
+                    </p>
                 </div>
             </div>
         </div>
-
-        <div class="column">
-            <div class="card">
-                {{!-- <img src="/w3images/team1.jpg" alt="Jane" style="width:100%"> --}}
-                <div class="container">
-                    <h2>Biswajeet Dixit</h2>
-                    {{!-- <p class="title">CEO & Founder</p> --}}
-                    {{!-- <p>Some text that describes me lorem ipsum ipsum lorem.</p> --}}
-                    <p>biswajeetdixit@gmail.com</p>
-                    <p><button class="button">Contact</button></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="card">
-                {{!-- <img src="/w3images/team2.jpg" alt="Mike" style="width:100%"> --}}
-                <div class="container">
-                    <h2>Sambit Swarup Sahu</h2>
-                    {{!-- <p class="title">Art Director</p> --}}
-                    {{!-- <p>Some text that describes me lorem ipsum ipsum lorem.</p> --}}
-                    <p>sambitsahu@gmail.com</p>
-                    <p><button class="button">Contact</button></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="card">
-                {{!-- <img src="/w3images/team3.jpg" alt="John" style="width:100%"> --}}
-                <div class="container">
-                    <h2>Amit Kumar Gouda</h2>
-                    {{!-- <p class="title">Designer</p> --}}
-                    {{!-- <p>Some text that describes me lorem ipsum ipsum lorem.</p> --}}
-                    <p>amitkrgouda@gmail.com</p>
-                    <p><button class="button">Contact</button></p>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 
     {{>footer}}
 
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const menuSwitch = document.querySelector('.menu-switch');
-        const menu = document.querySelector('.menu');
-
-        menuToggle.addEventListener('click', () => {
-            menu.classList.toggle('active');
-            menuToggle.classList.toggle('on');
-            menuSwitch.classList.toggle('on');
-        });
-
-        menuSwitch.addEventListener('click', () => {
-            menu.classList.toggle('active');
-            menuSwitch.classList.toggle('on');
-            menuToggle.classList.toggle('on');
-        })
-    </script>
 </body>
 
 </html>

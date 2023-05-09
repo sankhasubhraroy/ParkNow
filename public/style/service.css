@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
     margin: 0;
@@ -9,115 +8,107 @@
 }
 
 body {
-    font-family: 'Marcellus', serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     color: #333;
-    background-color: #f9f9f9;
+    background-color: #eeeaeb;
 }
 
-main {
-    margin-top: 80px;
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.hero {
-    background-image: url("https://images.unsplash.com/photo-1503551723145-6c040742065b-v2");
+.service-header {
+    background: linear-gradient(135deg, #291216d6, #5d4e23dc), url("https://images.unsplash.com/photo-1503551723145-6c040742065b");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 500px;
+    padding: 50px;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    color: white;
+}
+
+.service-header h1 {
+    font-size: xx-large;
+    margin-bottom: 50px;
+}
+
+.service-header p {
+    width: 70%;
+    margin: auto;
+}
+
+.service-cards ul {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
+    list-style: none;
+    margin: 40px;
 }
 
-.hero h1 {
-    font-family: 'Rowdies', cursive;
+.service-cards ul li {
     text-align: center;
-    text-transform: uppercase;
-    font-size: 3rem;
-    backdrop-filter: blur(5px);
-    margin-bottom: 20px;
+    padding: 40px;
+    width: 300px;
+    border-radius: 7px;
+    transition: box-shadow 0.3s;
 }
 
-.hero p {
-    font-size: 1.5rem;
-    max-width: 600px;
-    text-align: center;
-    backdrop-filter: blur(5px);
-    color: #000000;
+.service-cards ul li:hover {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.services {
-    padding: 50px 0;
+.service-cards ul li:hover i {
+    color: #5d4e23;
 }
 
-.service {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.service i {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.service h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.service p {
-    font-size: 1.2rem;
-    max-width: 400px;
-    text-align: center;
-    line-height: 1.5;
+.service-cards ul li:hover p {
     color: #555;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+.service-cards ul li:hover h3 {
+    color: #5d4e23;
 }
 
-@media screen and (max-width: 768px) {
-    .main {
-        margin-top: 150px;
-    }
+.service-cards ul li:hover h3:after {
+    width: 100px;
+}
 
-    .hero {
-        height: 400px;
-    }
+.service-cards ul li i {
+    font-size: 2.6em;
+    display: block;
+    transition: color 0.3s;
+    color: #a2a2a2;
+}
 
-    .hero h1 {
-        font-size: 2.5rem;
-    }
+.service-cards ul li h3 {
+    margin: 10px 0px 40px 0px;
+    color: #6f6f6f;
+    display: inline-block;
+    font-size: large;
+    font-weight: 100;
+    transition: color 0.3s;
+}
 
-    .hero p {
-        font-size: 1.2rem;
-    }
+.service-cards ul li h3:after {
+    content: '';
+    position: relative;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: #6f6f6f;
+    transition: width 0.3s;
+}
 
-    .service {
-        margin-bottom: 50px;
-    }
-
-    .service i {
-        font-size: 2rem;
-        margin-bottom: 10px;
-    }
-
-    .service h2 {
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-    }
-
-    .service p {
-        font-size: 1rem;
-        max-width: 100%;
-    }
+.service-cards ul li p {
+    color: #a2a2a2;
+    line-height: 26px;
+    transition: color 0.3s;
 }

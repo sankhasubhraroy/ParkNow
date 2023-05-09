@@ -1,35 +1,29 @@
 const express = require("express");
 const authController = require("../controllers/auth");
 const adminController = require("../controllers/admin");
-const e = require("express");
 const router = express.Router();
 
 router.get('/', authController.isLoggedIn, (req, res) => {
     if (req.user) {
-        res.render('index', {
-            visibility: true
-        })
+        res.render('index', { visibility: true });
     } else {
-        res.render('index', {
-            visibility: false
-        })
+        res.render('index', { visibility: false });
     }
-
 });
 
 router.get('/register', authController.isLoggedIn, (req, res) => {
     if (req.user) {
-        res.redirect('/account')
+        res.redirect('/account');
     } else {
-        res.render('register')
+        res.render('register');
     }
 });
 
 router.get('/login', authController.isLoggedIn, (req, res) => {
     if (req.user) {
-        res.redirect('/account')
+        res.redirect('/account');
     } else {
-        res.render('login')
+        res.render('login');
     }
 });
 
@@ -38,53 +32,53 @@ router.get('/account', authController.isLoggedIn, (req, res) => {
         res.render('account', {
             userId: req.user.id,
             userName: req.user.name,
-            userEmail: req.user.email
-        })
+            userEmail: req.user.email,
+            visibility: true
+        });
     }
     else {
-        res.redirect('/login')
+        res.redirect('/login');
     }
 })
 
 router.get('/account/profile', authController.isLoggedIn, (req, res) => {
-
-    let userDob = req.user.date_of_birth;
-    const dateData = userDob.toString().split(" ");
-    userDob = dateData[2] + "-" + dateData[1] + "-" + dateData[3];
-
     if (req.user) {
         res.render('profile', {
             userId: req.user.id,
             userName: req.user.name,
             userEmail: req.user.email,
             userPhone: req.user.mobile_no,
-            userDob,
-            userAddress: req.user.address
-        })
+            userDob: req.user.date_of_birth,
+            userAddress: req.user.address,
+            visibility: true
+        });
     }
     else {
-        res.redirect('/login')
+        res.redirect('/login');
     }
 })
 
-router.get('/account/bookings', authController.isLoggedIn, authController.bookings, authController.expiredBookings, (req, res) => {
-
-    const bookingDetails = req.bookings;
-    bookingDetails.map(booking => {
-        const dateData = booking.date.toString().split(" ");
-        booking.date = dateData[2] + "-" + dateData[1] + "-" + dateData[3];
-    })
-
-    const expiredBookingDetails = req.expiredBookings;
-    expiredBookingDetails.map(expiredBooking => {
-        const dateData = expiredBooking.date.toString().split(" ");
-        expiredBooking.date = dateData[2] + "-" + dateData[1] + "-" + dateData[3];
-    })
+router.get('/account/bookings', authController.isLoggedIn, authController.bookings, (req, res) => {
 
     if (req.user) {
+        const bookingDetails = req.activeBookings;
+
+        bookingDetails.map(booking => {
+            booking.check_in = booking.check_in.toLocaleString();
+            booking.check_out = booking.check_out.toLocaleString();
+        });
+
+        const expiredBookingDetails = req.expiredBookings;
+
+        expiredBookingDetails.map(expiredBooking => {
+            expiredBooking.check_in = expiredBooking.check_in.toLocaleString();
+            expiredBooking.check_out = expiredBooking.check_out.toLocaleString();
+        });
+
         res.render('bookings', {
             bookingDetails,
-            expiredBookingDetails
+            expiredBookingDetails,
+            visibility: true
         });
     }
     else {
@@ -94,26 +88,42 @@ router.get('/account/bookings', authController.isLoggedIn, authController.bookin
 
 router.get('/book', authController.isLoggedIn, (req, res) => {
     if (req.user) {
-        res.render('book');
+        res.render('book', { visibility: true });
     } else {
         res.redirect('/login');
     }
 })
 
-router.get('/contact', (req, res) => {
-    res.render('contact');
+router.get('/contact', authController.isLoggedIn, (req, res) => {
+    if (req.user) {
+        res.render('contact', { visibility: true });
+    } else {
+        res.render('contact', { visibility: false });
+    }
 })
 
-router.get('/about', (req, res) => {
-    res.render('about');
+router.get('/about', authController.isLoggedIn, (req, res) => {
+    if (req.user) {
+        res.render('about', { visibility: true });
+    } else {
+        res.render('about', { visibility: false });
+    }
 })
 
-router.get('/service', (req, res) => {
-    res.render('service');
+router.get('/service', authController.isLoggedIn, (req, res) => {
+    if (req.user) {
+        res.render('service', { visibility: true });
+    } else {
+        res.render('service', { visibility: false });
+    }
 })
 
-router.get('/pricing', (req, res) => {
-    res.render('pricing');
+router.get('/pricing', authController.isLoggedIn, (req, res) => {
+    if (req.user) {
+        res.render('pricing', { visibility: true });
+    } else {
+        res.render('pricing', { visibility: false });
+    }
 })
 
 
@@ -144,15 +154,14 @@ router.get('/admin/dashboard', adminController.isAdminLoggedIn, adminController.
 router.get('/admin/dashboard/active-bookings', adminController.isAdminLoggedIn, adminController.activeBookings, (req, res) => {
 
     if (req.admin) {
-        const bookingHistory = req.bookings;
+        const bookingHistory = req.activeBookings;
+
         bookingHistory.map(booking => {
-            const dateData = booking.date.toString().split(" ");
-            booking.date = dateData[2] + " " + dateData[1] + " " + dateData[3];
+            booking.check_in = booking.check_in.toLocaleString();
+            booking.check_out = booking.check_out.toLocaleString();
         })
 
-        res.render('activeBookings', {
-            bookingHistory
-        })
+        res.render('activeBookings', { bookingHistory })
     } else {
         res.redirect('/admin/login');
     }
@@ -162,14 +171,13 @@ router.get('/admin/dashboard/expired-bookings', adminController.isAdminLoggedIn,
 
     if (req.admin) {
         const expiredBookingHistory = req.expiredBookings;
+
         expiredBookingHistory.map(booking => {
-            const dateData = booking.date.toString().split(" ");
-            booking.date = dateData[2] + " " + dateData[1] + " " + dateData[3];
+            booking.check_in = booking.check_in.toLocaleString();
+            booking.check_out = booking.check_out.toLocaleString();
         })
 
-        res.render('expiredBookings', {
-            expiredBookingHistory
-        })
+        res.render('expiredBookings', { expiredBookingHistory })
     } else {
         res.redirect('/admin/login');
     }
@@ -179,11 +187,6 @@ router.get('/admin/dashboard/customers', adminController.isAdminLoggedIn, adminC
 
     if (req.admin) {
         const customerDetails = req.customers;
-        customerDetails.map(dob => {
-            const dateData = dob.date_of_birth.toString().split(" ");
-            dob.date_of_birth = dateData[2] + " " + dateData[1] + " " + dateData[3];
-        })
-
         res.render('customers', { customerDetails });
     } else {
         res.redirect('/admin/login');

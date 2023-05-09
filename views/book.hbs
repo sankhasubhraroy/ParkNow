@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/9f5e9c7e33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style/navbar.css">
     <link rel="stylesheet" href="/style/footer.css">
     <link rel="stylesheet" href="/style/book.css">
@@ -129,45 +130,8 @@
     </script>
     {{/if}}
 
-    <script>
-        const vno = document.getElementById('vehicleNo');
-        const date = document.getElementById('date');
-        const time = document.getElementById('time');
-        const duration = document.getElementById('duration');
-        function vnoFunc() {
-            if (vno.value) {
-                vno.parentElement.classList.add('active')
-            }
-            else {
-                vno.parentElement.classList.remove('active')
-            }
-        }
-        function dateFunc() {
-            if (date.value) {
-                date.parentElement.classList.add('active')
-            }
-            else {
-                date.parentElement.classList.remove('active')
-            }
-        }
-        function timeFunc() {
-            if (time.value) {
-                time.parentElement.classList.add('active')
-            }
-            else {
-                time.parentElement.classList.remove('active')
-            }
-        }
-
-        duration.addEventListener('change', () => {
-            if (duration.value) {
-                duration.parentElement.classList.add('active')
-            }
-            else {
-                duration.parentElement.classList.remove('active')
-            }
-        })
-    </script>
+    <script src="/script/book.js"></script>
+    <script src="/script/navbar.js"></script>
 </body>
 
 </html>

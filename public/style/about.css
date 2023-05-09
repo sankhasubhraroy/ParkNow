@@ -1,81 +1,176 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-html {
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-*,
-*:before,
-*:after {
-    box-sizing: inherit;
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #eeeaeb;
+}
+
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.container {
+    width: 1120px;
 }
 
 .row {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
-.column {
-    width: 25%;
-    margin-bottom: 16px;
-    padding: 8px;
+.about-card {
+    width: 30%;
 }
 
-.card {
-    /* height: 300px; */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin: 8px;
+.our-team {
+    height: 100%;
+    padding: 30px 40px;
+    border-radius: 12px;
+    background-color: #f7f5ec;
+    box-shadow: -4px 4px 10px #3333334c;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.our-team .picture {
+    display: inline-block;
+    height: 130px;
+    width: 130px;
+    margin-bottom: 50px;
+    z-index: 1;
+    position: relative;
+}
+
+.our-team .picture::before {
+    content: "";
+    width: 100%;
+    height: 0;
+    border-radius: 50%;
+    background-color: #BE233F;
+    position: absolute;
+    bottom: 135%;
+    right: 0;
+    left: 0;
+    opacity: 0.9;
+    transform: scale(3);
+    transition: all 0.3s linear 0s;
+}
+
+.our-team:hover .picture::before {
+    height: 100%;
+}
+
+.our-team .picture::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #BE233F;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.our-team .picture img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: all 0.9s ease 0s;
+}
+
+.our-team:hover .picture img {
+    box-shadow: 0 0 0 14px #f7f5ec;
+    transform: scale(0.7);
+}
+
+.our-team .title {
+    display: block;
+    font-size: 15px;
+    color: #4e5052;
+    text-transform: capitalize;
+}
+
+.our-team .social {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #38111e;
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    transition: all 0.5s ease 0s;
+}
+
+.our-team:hover .social {
+    bottom: 0;
+}
+
+.our-team .social li {
+    display: inline-block;
+}
+
+.our-team .social li a {
+    display: block;
+    padding: 10px;
+    font-size: 17px;
+    color: white;
+    transition: all 0.3s ease 0s;
+    text-decoration: none;
+}
+
+.our-team .social li a:hover {
+    color: #BE233F;
+    background-color: #f7f5ec;
 }
 
 .about-section {
+    width: 65%;
+    background: #BE233F;
+    background: linear-gradient(180deg, #be233fd8, #38111ed7), url("https://images.unsplash.com/photo-1518481612222-68bbe828ecd1");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 4px 4px 10px #333333a0;
     padding: 50px;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
     text-align: center;
-    background-color: #474e5d;
     color: white;
 }
 
-.container {
-    padding: 0 16px;
+.about-section h1 {
+    margin-bottom: 50px;
 }
 
-.container::after,
-.row::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.title {
-    color: grey;
-}
-
-.button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-}
-
-.button:hover {
-    background-color: #555;
-}
-
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 850px) {
     .row {
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 
-    .column {
+    .about-card {
         width: 100%;
-        display: block;
+    }
+
+    .about-section {
+        width: 100%;
+        margin-bottom: 50px;
     }
 }

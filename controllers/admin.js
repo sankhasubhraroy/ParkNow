@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
 const { request } = require("http");
-const { ifError } = require("assert");
 
 const db = mysql.createConnection({
     host: process.env.HOST,
@@ -187,12 +186,12 @@ exports.adminDashboard = async (req, res, next) => {
 
 exports.activeBookings = async (req, res, next) => {
 
-    db.query('SELECT * FROM bookings JOIN users ON bookings.id = users.id WHERE status = "active" ORDER BY date DESC', (err, result) => {
+    db.query('SELECT * FROM bookings JOIN users ON bookings.id = users.id WHERE status = "active" ORDER BY check_out DESC', (err, result) => {
         if (err) {
             console.log(err);
         }
         else {
-            req.bookings = result;
+            req.activeBookings = result;
             return next();
         }
     })
@@ -200,7 +199,7 @@ exports.activeBookings = async (req, res, next) => {
 
 exports.expiredBookings = async (req, res, next) => {
 
-    db.query('SELECT * FROM bookings JOIN users ON bookings.id = users.id WHERE status = "expired" ORDER BY date DESC', (err, result) => {
+    db.query('SELECT * FROM bookings JOIN users ON bookings.id = users.id WHERE status = "expired" ORDER BY check_out DESC', (err, result) => {
         if (err) {
             console.log(err);
         }
@@ -241,9 +240,9 @@ exports.payments = (req, res, next) => {
                     req.stats = result[0];
                     return next();
                 }
-            })
+            });
         }
-    })
+    });
 }
 
 exports.deleteBookingHistory = (req, res) => {

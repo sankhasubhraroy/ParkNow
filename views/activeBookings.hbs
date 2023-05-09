@@ -89,10 +89,9 @@
                             <th data-priority="2">Vehicle No</th>
                             <th data-priority="3">Vehicle Type</th>
                             <th data-priority="4">Name</th>
-                            <th data-priority="5">Date</th>
-                            <th data-priority="6">Time</th>
-                            <th data-priority="7">Duration</th>
-                            <th data-priority="8">Action</th>
+                            <th data-priority="5">Check-In</th>
+                            <th data-priority="6">Check-Out</th>
+                            <th data-priority="7">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -102,9 +101,8 @@
                             <td>{{this.vehicle_no}}</td>
                             <td>{{this.vehicle_type}}</td>
                             <td>{{this.name}}</td>
-                            <td>{{this.date}}</td>
-                            <td>{{this.time}}</td>
-                            <td>{{this.duration}} Hour</td>
+                            <td>{{this.check_in}}</td>
+                            <td>{{this.check_out}}</td>
                             <td>
                                 <a href="/auth/admin/delete-booking-history?booking_id={{this.booking_id}}">
                                     <i class="fa fa-trash"></i>

@@ -6,7 +6,7 @@
     src: url(resources/DebraRounded-Bold.otf);
 }
 
-* {
+/* * {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
@@ -24,7 +24,7 @@ body {
     background-color: #f4f4f4;
     align-items: start;
     min-height: 100vh;
-}
+} */
 
 .footer {
     display: flex;

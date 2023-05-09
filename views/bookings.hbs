@@ -23,11 +23,10 @@
           <div class="col col-1">Booking Id</div>
           <div class="col col-2">Vehicle Type</div>
           <div class="col col-3">Vehicle No</div>
-          <div class="col col-4">Date</div>
-          <div class="col col-5">Time</div>
-          <div class="col col-6">Duration</div>
-          <div class="col col-7">Amount</div>
-          <div class="col col-8">Receipt</div>
+          <div class="col col-4">Check-In</div>
+          <div class="col col-5">Check-Out</div>
+          <div class="col col-6">Amount</div>
+          <div class="col col-7">Receipt</div>
         </li>
 
         {{#each bookingDetails}}
@@ -35,11 +34,10 @@
           <div class="col col-1" data-label="Booking Id">{{this.booking_id}}</div>
           <div class="col col-2" data-label="Vehicle Type">{{this.vehicle_type}}</div>
           <div class="col col-3" data-label="Vehicle No">{{this.vehicle_no}}</div>
-          <div class="col col-4" data-label="Date">{{this.date}}</div>
-          <div class="col col-5" data-label="Time">{{this.time}}</div>
-          <div class="col col-6" data-label="Duration">{{this.duration}} Hour</div>
-          <div class="col col-7" data-label="Amount">{{this.amount}} Rs</div>
-          <div class="col col-8" data-label="Receipt">
+          <div class="col col-4" data-label="Check-In">{{this.check_in}}</div>
+          <div class="col col-5" data-label="Check-Out">{{this.check_out}}</div>
+          <div class="col col-6" data-label="Amount">{{this.amount}} Rs</div>
+          <div class="col col-7" data-label="Receipt">
             <a href="">
               <i class="fa-solid fa-file-arrow-down"></i>
             </a>
@@ -52,11 +50,10 @@
           <div class="col col-1" data-label="Booking Id">{{this.booking_id}}</div>
           <div class="col col-2" data-label="Vehicle Type">{{this.vehicle_type}}</div>
           <div class="col col-3" data-label="Vehicle No">{{this.vehicle_no}}</div>
-          <div class="col col-4" data-label="Date">{{this.date}}</div>
-          <div class="col col-5" data-label="Time">{{this.time}}</div>
-          <div class="col col-6" data-label="Duration">{{this.duration}} Hour</div>
-          <div class="col col-7" data-label="Amount">{{this.amount}} Rs</div>
-          <div class="col col-8" data-label="Receipt"><i class="fa-solid fa-file-arrow-down"></i></div>
+          <div class="col col-4" data-label="Check-In">{{this.check_in}}</div>
+          <div class="col col-5" data-label="Check-Out">{{this.check_out}}</div>
+          <div class="col col-6" data-label="Amount">{{this.amount}} Rs</div>
+          <div class="col col-7" data-label="Receipt"><i class="fa-solid fa-file-arrow-down"></i></div>
         </li>
         {{/each}}
       </ul>

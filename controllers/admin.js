@@ -2,9 +2,8 @@ const mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
-const { request } = require("http");
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
     host: process.env.HOST,
     user: process.env.DATABASE_USER,
     password: process.env.PASSWORD,

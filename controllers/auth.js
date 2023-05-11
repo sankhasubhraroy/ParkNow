@@ -1,16 +1,9 @@
-const mysql = require("mysql");
+const db = require("../config/database");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
-
-const db = mysql.createPool({
-    host: process.env.HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
-});
 
 const instance = new Razorpay({
     key_id: process.env.KEY_ID,
@@ -164,6 +157,52 @@ exports.editDetails = async (req, res, next) => {
     }
     else {
         return next();
+    }
+}
+
+exports.changePassword = async (req, res) => {
+    console.log(req.body);
+    const { old_password, new_password, confirm_password } = req.body;
+
+    if (!old_password || !new_password || !confirm_password) {
+        return res.render('settings', {
+            message: "Fill all the fields"
+        });
+    }
+    else if (new_password != confirm_password) {
+        return res.render('settings', {
+            message: "The new password don't match"
+        });
+    }
+    else if (req.cookies.userSave) {
+        // 1. Verify the token
+        const decoded = await promisify(jwt.verify)(req.cookies.userSave,
+            process.env.JWT_SECRET
+        );
+
+        db.query('SELECT password FROM users WHERE id = ?', [decoded.id], async (err, result) => {
+
+            if (err) {
+                console.log(err);
+            }
+            else if (!await bcrypt.compare(old_password, result[0].password)) {
+                return res.status(401).render('settings', {
+                    message: "The old password is incorrect"
+                })
+            }
+            else {
+                let hashedPassword = await bcrypt.hash(new_password, 8);
+
+                db.query('UPDATE users SET password = ? WHERE id = ?', [hashedPassword, decoded.id], (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    else {
+                        res.status(200).redirect('/account');
+                    }
+                });
+            }
+        });
     }
 }
 
@@ -344,4 +383,19 @@ exports.bookings = async (req, res, next) => {
     else {
         return next();
     }
+}
+
+exports.generateInvoice = (req, res, next) => {
+
+    db.query('SELECT * FROM bookings INNER JOIN payments ON bookings.booking_id = payments.booking_id INNER JOIN users ON bookings.id = users.id WHERE bookings.booking_id = ?', [req.query.booking_id], (err, result) => {
+        // console.log(result[0]);
+
+        if (err) {
+            console.log(err);
+        }
+        else {
+            req.invoiceDetails = result[0];
+            return next();
+        }
+    });
 }

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/style/footer.css">
+	<link rel="stylesheet" href="/style/navbar.css">
+	<link rel="stylesheet" href="/style/invoice.css">
+	<title>Payment Invoice</title>
+</head>
+
+<body>
+
+	{{>navbar}}
+
+	<div class="invoice-box">
+		<table id="invoice" cellpadding="0" cellspacing="0">
+			<tr class="top">
+				<td colspan="2">
+					<table>
+						<tr>
+							<td class="logo">
+								<img src="https://i.ibb.co/7CPBGwk/Park-Now-Logo-2.png">
+							</td>
+							<td class="title">
+								<h1>ParkNow</h1>
+							</td>
+							<td>
+								Invoice No: {{invoiceDetails.id}}_{{invoiceDetails.booking_id}}<br />
+								Paid at: {{invoiceDetails.payment_date}}<br />
+								Downloaded at: {{today}}
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr class="information">
+				<td colspan="2">
+					<table>
+						<tr>
+							<td>
+								ParkNow<br />
+								ParkNow Corporation Main Building<br />
+								India, +91 861XXXX147
+							</td>
+							<td>
+								{{invoiceDetails.name}}<br />
+								{{invoiceDetails.email}} <br>
+								{{invoiceDetails.mobile_no}}
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr class="heading">
+				<td>Booking Details</td>
+				<td></td>
+			</tr>
+			<tr class="item">
+				<td>Booking Id</td>
+				<td>{{invoiceDetails.booking_id}}</td>
+			</tr>
+			<tr class="item">
+				<td>Vehicle No</td>
+				<td>{{invoiceDetails.vehicle_no}}</td>
+			</tr>
+			<tr class="item">
+				<td>Vehicle Type</td>
+				<td>{{invoiceDetails.vehicle_type}}</td>
+			</tr>
+			<tr class="item">
+				<td>Check-In</td>
+				<td>{{invoiceDetails.check_in}}</td>
+			</tr>
+			<tr class="item last">
+				<td>Check-Out</td>
+				<td>{{invoiceDetails.check_out}}</td>
+			</tr>
+			<tr class="total">
+				<td></td>
+				<td>Amount : ₹ {{invoiceDetails.amount}}</td>
+			</tr>
+		</table>
+		<button class="downld-btn" onclick="window.print()">Download Invoice</button>
+		<p class="warning-text">Show this payment invoice to the parking lot attendant at the time of parking</p>
+	</div>
+
+	{{>footer}}
+
+	<script src="/script/navbar.js"></script>
+</body>
+
+</html>

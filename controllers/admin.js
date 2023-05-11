@@ -1,14 +1,7 @@
-const mysql = require("mysql");
+const db = require("../config/database");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
-
-const db = mysql.createPool({
-    host: process.env.HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
-});
 
 exports.adminLogin = async (req, res) => {
 

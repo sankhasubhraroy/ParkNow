@@ -10,6 +10,7 @@ router.get('/logout', authController.logout);
 router.post('/book', authController.book);
 router.post('/book/verify', authController.verify);
 router.post('/account/profile/edit-details', authController.editDetails);
+router.post('/account/settings/change-password', authController.changePassword);
 
 
 router.post('/admin/register', adminController.adminRegister);

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/9f5e9c7e33.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style/footer.css">
+    <link rel="stylesheet" href="/style/navbar.css">
+    <link rel="stylesheet" href="/style/settings.css">
+    <title>Profile Settings</title>
+</head>
+
+<body>
+
+    {{>navbar}}
+
+    <div class="main-container">
+        <div class="container">
+            <div class="form-container">
+                <form action="/auth/account/settings/change-password" method="POST" class="edit-details-form">
+                    <h2>Change Password</h2>
+
+                    <div class="form-data">
+                        <label for="old_password" class="form-label">Old Password</label>
+                        <input type="password" class="form-input" id="old_password" name="old_password">
+                        <span class="animated-symbol">
+                            <i id="old_password_toggle" class="fa fa-eye"></i>
+                        </span>
+                        <span class="bottom-border"></span>
+                    </div>
+
+                    <div class="form-data">
+                        <label for="new_password" class="form-label">New Password</label>
+                        <input type="password" class="form-input" id="new_password" name="new_password">
+                        <span class="animated-symbol">
+                            <i id="new_password_toggle" class="fa fa-eye"></i>
+                        </span>
+                        <span class="bottom-border"></span>
+                    </div>
+
+                    <div class="form-data">
+                        <label for="confirm_password" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-input" id="confirm_password" name="confirm_password">
+                        <span class="animated-symbol">
+                            <i id="confirm_password_toggle" class="fa fa-eye"></i>
+                        </span>
+                        <span class="bottom-border"></span>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Update Password</button>
+                </form>
+            </div>
+        </div>
+        {{#if message}}
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+            {{message}}
+        </div>
+        {{/if}}
+    </div>
+
+    {{>footer}}
+
+    <script src="/script/settings.js"></script>
+
+    {{#if message }}
+    <script>
+        const closeButton = document.querySelector('.closebtn');
+        const alertDiv = closeButton.parentElement;
+
+        setTimeout(() => {
+            alertDiv.style.display = 'none'
+        }, 6000)
+    </script>
+    {{/if}}
+</body>
+
+</html>

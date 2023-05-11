@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+@font-face {
+    font-family: DebraRounded-Bold;
+    src: url(resources/DebraRounded-Bold.otf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background: #eeeaeb;
+}
+
+.invoice-box {
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'Poppins', sans-serif;
+    color: #555;
+}
+
+.invoice-box table {
+    width: 100%;
+    line-height: inherit;
+    text-align: left;
+}
+
+.invoice-box table td {
+    padding: 5px;
+    vertical-align: top;
+}
+
+.invoice-box table tr td:nth-child(2) {
+    text-align: right;
+}
+
+.invoice-box table tr td:nth-child(3) {
+    text-align: right;
+}
+
+.invoice-box table tr.top table td {
+    padding-bottom: 20px;
+}
+
+.invoice-box table tr.top table td.logo {
+    width: 100px;
+    height: 100px;
+}
+
+.invoice-box table tr.top table td.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.invoice-box table tr.top table td.title {
+    text-align: left;
+    vertical-align: middle;
+}
+
+.invoice-box table tr.top table td.title h1 {
+    font-family: DebraRounded-Bold;
+    display: inline-block;
+    background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
+    background-clip: text;
+    print-color-adjust: exact;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-print-color-adjust: exact;
+}
+
+.invoice-box table tr.information table td {
+    padding-bottom: 40px;
+}
+
+.invoice-box table tr.heading td {
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+}
+
+.invoice-box table tr.item td {
+    border-bottom: 1px solid #eee;
+}
+
+.invoice-box table tr.item.last td {
+    border-bottom: none;
+}
+
+.invoice-box table tr.total td:nth-child(2) {
+    border-top: 2px solid #eee;
+    font-weight: bold;
+}
+
+.downld-btn {
+    cursor: pointer;
+    display: block;
+    margin: 40px auto 0;
+    padding: 10px 20px;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    transition: background-color 0.3s linear;
+}
+
+.downld-btn:hover {
+    background-color: #ddd;
+}
+
+.warning-text {
+    display: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FC466B;
+    text-align: center;
+    margin: 40px auto 0;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+}
+
+@media only screen and (max-width: 767px) {
+    .invoice-box table tr.top table td {
+        width: 100%;
+        display: block;
+        text-align: left;
+    }
+
+    .invoice-box table tr.top table .logo,
+    .invoice-box table tr.top table .title {
+        width: fit-content;
+        display: inline-block;
+        vertical-align: middle;
+        padding: 0;
+    }
+
+    .invoice-box table tr.information table td {
+        width: 100%;
+        display: block;
+        text-align: left;
+    }
+}
+
+@media print {
+
+    header,
+    .footer,
+    .downld-btn {
+        display: none;
+    }
+
+    body {
+        background-color: #fff;
+    }
+
+    .warning-text {
+        display: block;
+    }
+}

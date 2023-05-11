@@ -58,6 +58,17 @@ router.get('/account/profile', authController.isLoggedIn, (req, res) => {
     }
 })
 
+router.get('/account/settings', authController.isLoggedIn, (req, res) => {
+    if (req.user) {
+        res.render('settings', {
+            visibility: true
+        });
+    }
+    else {
+        res.redirect('/login');
+    }
+})
+
 router.get('/account/bookings', authController.isLoggedIn, authController.bookings, (req, res) => {
 
     if (req.user) {
@@ -83,6 +94,26 @@ router.get('/account/bookings', authController.isLoggedIn, authController.bookin
     }
     else {
         res.redirect('/login');
+    }
+})
+
+router.get('/account/bookings/booking-invoice', authController.isLoggedIn, authController.generateInvoice, (req, res) => {
+    if (req.user) {
+        const today = new Date().toLocaleString();
+        const invoiceDetails = req.invoiceDetails;
+
+        invoiceDetails.payment_date = invoiceDetails.payment_date.toLocaleString();
+        invoiceDetails.check_in = invoiceDetails.check_in.toLocaleString();
+        invoiceDetails.check_out = invoiceDetails.check_out.toLocaleString();
+
+        res.render('invoice', {
+            today,
+            invoiceDetails,
+            visibility: true
+        })
+    }
+    else {
+        res.redirect('/login')
     }
 })
 

@@ -199,6 +199,15 @@ body {
     }
 
     .left {
-        display: none;
+        transform: scale(2);
+        margin: 60px 0 120px;
+    }
+
+    .left:hover {
+        transform: scale(2);
+    }
+
+    .left:hover+.right {
+        transform: none;
     }
 }

@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="/style/footer.css">
 	<link rel="stylesheet" href="/style/navbar.css">
 	<link rel="stylesheet" href="/style/contact.css">
-	<title>Contact</title>
+	<title>Contact - ParkNow</title>
 </head>
 
 <body>
@@ -35,11 +35,13 @@
 								placeholder="Message"></textarea>
 						</div>
 						<button class="submit-btn">Send Message</button>
+
+						{{#if success_message}}
+						{{>success}}
+						{{/if}}
+
 						{{#if message}}
-						<div class="alert">
-							<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-							{{message}}
-						</div>
+						{{>alert}}
 						{{/if}}
 					</form>
 				</div>
@@ -79,15 +81,12 @@
 
 	<script src="/script/navbar.js"></script>
 
-	{{#if message}}
-	<script>
-		const closeButton = document.querySelector('.closebtn');
-		const alertDiv = closeButton.parentElement;
+	{{#if success_message}}
+	<script src="/script/alert.js"></script>
+	{{/if}}
 
-		setTimeout(() => {
-			alertDiv.style.display = 'none'
-		}, 6000)
-	</script>
+	{{#if message}}
+	<script src="/script/alert.js"></script>
 	{{/if}}
 
 </body>

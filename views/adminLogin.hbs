@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/adminLogin.css">
-    <title>Admin Login</title>
+    <title>Admin Login - ParkNow</title>
 </head>
 
 <body>
@@ -51,22 +51,8 @@
         </div>
     </section>
 
-    <script>
-        const loginForm = document.getElementById("login-form");
-        const signupForm = document.getElementById("signup-form");
-        const signupLink = document.querySelector('.signup-link');
-        const loginLink = document.querySelector('.login-link');
-
-        signupLink.addEventListener('click', () => {
-            loginForm.classList.add('hidden');
-            signupForm.classList.remove('hidden');
-        })
-
-        loginLink.addEventListener('click', () => {
-            signupForm.classList.add('hidden');
-            loginForm.classList.remove('hidden');
-        })
-    </script>
+    {{!--
+    <script src="/script/adminLogin.js"></script> --}}
 </body>
 
 </html>

@@ -24,9 +24,11 @@ const sendMail = async (email, subject, content) => {
         transporter.sendMail(options, (err, info) => {
             if (err) {
                 console.log(err);
+                return false;
             }
             else {
-                console.log("Message sent: %s", info.messageId);
+                // console.log("Message sent: %s", info.messageId);
+                return true;
             }
         });
     }

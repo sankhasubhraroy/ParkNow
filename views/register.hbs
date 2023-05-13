@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/9f5e9c7e33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style/login.css">
-    <title>Register</title>
+    <title>Register - ParkNow</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
                     <h4 class="login-text">Register</h4>
 
                     <div class="input-container">
-                        <label for="name" class="form-label-text">Name</label>
+                        <label for="name" class="form-label-text">Name *</label>
                         <input type="text" class="form-input" id="name" name="name" placeholder="Type your name">
                         <span class="animated-symbol">
                             <i class="fa fa-user"></i>
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="input-container">
-                        <label for="email" class="form-label-text">Email</label>
+                        <label for="email" class="form-label-text">Email *</label>
                         <input type="email" class="form-input" id="email" name="email" placeholder="Type your email id">
                         <span class="animated-symbol">
                             <i class="fa fa-envelope"></i>
@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="input-container">
-                        <label for="password" class="form-label-text">Password</label>
+                        <label for="password" class="form-label-text">Password *</label>
                         <input type="password" class="form-input" id="password" name="password"
                             placeholder="Type your password">
                         <span class="animated-symbol">
@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="input-container">
-                        <label for="passwordConfirm" class="form-label-text">Confirm Password</label>
+                        <label for="passwordConfirm" class="form-label-text">Confirm Password *</label>
                         <input type="password" class="form-input" id="passwordConfirm" name="passwordConfirm"
                             placeholder="Confirm your password">
                         <span class="animated-symbol">
@@ -94,21 +94,13 @@
             </div>
         </div>
         {{#if message}}
-        <div class="alert">
-            <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-            {{message}}
-        </div>
+        {{>alert}}
         {{/if}}
     </div>
 
-    <script>
-        const closeButton = document.querySelector('.closebtn');
-        const alertDiv = closeButton.parentElement;
-
-        setTimeout(() => {
-            alertDiv.style.display = 'none'
-        }, 6000)
-    </script>
+    {{#if message}}
+    <script src="/script/alert.js"></script>
+    {{/if}}
 </body>
 
 </html>

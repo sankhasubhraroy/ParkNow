@@ -18,13 +18,11 @@ exports.login = async (req, res) => {
 
     if (!email || !password) {
         return res.status(400).render('login', {
-            message: "Please Provide an email and password"
+            message: "Please provide an email or password"
         })
     }
     else {
         db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
-
-            console.log(results[0]);
 
             if (err) {
                 console.log(err);
@@ -32,7 +30,7 @@ exports.login = async (req, res) => {
 
             else if (!results[0] || !await bcrypt.compare(password, results[0].password)) {
                 return res.status(401).render('login', {
-                    message: 'Email or Password is incorrect'
+                    message: 'Email or password is incorrect'
                 })
             }
             else {
@@ -42,8 +40,6 @@ exports.login = async (req, res) => {
                     expiresIn: process.env.JWT_EXPIRES_IN,
                 });
 
-                console.log("the token is " + token);
-
                 const cookieOptions = {
                     expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
                     httpOnly: true
@@ -51,7 +47,7 @@ exports.login = async (req, res) => {
                 res.cookie('userSave', token, cookieOptions);
                 res.status(200).redirect("/account");
             }
-        })
+        });
     }
 }
 
@@ -63,42 +59,56 @@ exports.register = (req, res) => {
 
     if (!name || !email || !password || !passwordConfirm) {
         return res.render("register", {
-            message: 'All fields are mandatory'
+            message: 'All * fields are mandatory'
+        });
+    }
+    else if (password != passwordConfirm) {
+        return res.render("register", {
+            message: 'Password do not match'
+        });
+    }
+    else if (password.length < 8) {
+        return res.render("register", {
+            message: 'password must be at least 8 characters'
         });
     }
     else {
 
-        db.query('SELECT email from users WHERE email = ?', [email], async (err, results) => {
-            // console.log(results)
-            // console.log(results[0])
+        db.query('SELECT email from users WHERE email = ?', [email], async (err, result) => {
+
             if (err) {
                 console.log(err);
             }
-
-            else if (Object.keys(results).length > 0) {
+            else if (result.length > 0) {
                 return res.render("register", {
-                    message: 'The email is already in use'
+                    message: 'The email is already registered'
                 })
             }
-            else if (password != passwordConfirm) {
-                return res.render("register", {
-                    message: 'Password don\'t match'
+            else {
+                const hashedPassword = await bcrypt.hash(password, 8);
+
+                db.query('INSERT INTO users SET ?', { name, email, mobile_no, date_of_birth, address, password: hashedPassword }, (err, result) => {
+
+                    if (err) {
+                        console.log(err);
+                    }
+                    else {
+                        const id = result.insertId;
+
+                        const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+                            expiresIn: process.env.JWT_EXPIRES_IN,
+                        });
+
+                        const cookieOptions = {
+                            expiresIn: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
+                            httpOnly: true
+                        }
+                        res.cookie('userSave', token, cookieOptions);
+                        res.status(200).redirect("/account");
+                    }
                 });
             }
-
-            let hashedPassword = await bcrypt.hash(password, 8);
-            console.log(hashedPassword);
-
-            db.query('INSERT INTO users SET ?', { name, email, mobile_no, date_of_birth, address, password: hashedPassword }, (err, results) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    return res.render("register", {
-                        message: 'User successfully registered'
-                    });
-                }
-            })
-        })
+        });
     }
 }
 
@@ -110,11 +120,11 @@ exports.isLoggedIn = async (req, res, next) => {
             const decoded = await promisify(jwt.verify)(req.cookies.userSave,
                 process.env.JWT_SECRET
             );
-            console.log(decoded);
+            // console.log(decoded);
 
             // 2. Check if the user still exist
             db.query('SELECT * FROM users WHERE id = ?', [decoded.id], (err, results) => {
-                // console.log(results);
+
                 if (!results) {
                     return next();
                 }
@@ -137,7 +147,7 @@ exports.logout = async (req, res) => {
 }
 
 exports.editDetails = async (req, res, next) => {
-    // console.log(req.body);
+
     const { name, email, mobile_no, date_of_birth, address } = req.body;
 
     if (req.cookies.userSave) {
@@ -175,6 +185,11 @@ exports.changePassword = async (req, res) => {
             message: "The new password don't match"
         });
     }
+    else if (new_password.length < 8) {
+        return res.render("settings", {
+            message: 'password must be at least 8 characters'
+        });
+    }
     else if (req.cookies.userSave) {
         // 1. Verify the token
         const decoded = await promisify(jwt.verify)(req.cookies.userSave,
@@ -199,7 +214,7 @@ exports.changePassword = async (req, res) => {
                         console.log(err);
                     }
                     else {
-                        res.status(200).redirect('/account');
+                        return res.status(200).redirect('/account');
                     }
                 });
             }
@@ -245,14 +260,15 @@ exports.book = (req, res, next) => {
 
     if (!vehicleType || !vehicleNo || !date || !time || !duration) {
         return res.render('book', {
-            message: 'Fill all the details, Please'
+            message: 'Fill all the details, Please',
+            visibility: true
         });
     }
     else {
         db.query('SELECT COUNT(booking_id) AS occupied FROM bookings WHERE check_out > ? AND check_in < ? AND status = "active"', [check_in, check_out], async (err, result) => {
 
             const occupied = result[0].occupied;
-            console.log(occupied, " slot has been occupied");
+            // console.log(occupied, " slot has been occupied");
 
             if (err) {
                 console.log(err);
@@ -300,6 +316,9 @@ exports.book = (req, res, next) => {
                                     phoneNo,
                                     vehicleNo,
                                     vehicleType,
+                                    date,
+                                    time,
+                                    duration,
                                     check_in,
                                     check_out
                                 });
@@ -315,9 +334,10 @@ exports.book = (req, res, next) => {
     }
 }
 
-exports.verify = (req, res) => {
+exports.verify = (req, res, next) => {
 
     const { id, name, email, phoneNo, vehicleType, vehicleNo, check_in, check_out, amount, razorpay_payment_id, razorpay_order_id, razorpay_signature } = req.body;
+
     const key_secret = process.env.KEY_SECRET;
 
     const hmac = crypto.createHmac('sha256', key_secret);
@@ -360,8 +380,9 @@ exports.verify = (req, res) => {
             }
         });
     }
-    else
-        console.log('fail');
+    else {
+        return next();
+    }
 }
 
 exports.bookings = async (req, res, next) => {
@@ -401,7 +422,6 @@ exports.bookings = async (req, res, next) => {
 exports.generateInvoice = (req, res, next) => {
 
     db.query('SELECT * FROM bookings INNER JOIN payments ON bookings.booking_id = payments.booking_id INNER JOIN users ON bookings.id = users.id WHERE bookings.booking_id = ?', [req.query.booking_id], (err, result) => {
-        // console.log(result[0]);
 
         if (err) {
             console.log(err);
@@ -421,24 +441,29 @@ exports.contact = (req, res) => {
         <b>Email: </b>${email}</p>
         <p><b>Message: </b>${message}</p>`
 
-    if (sendMail(smtp_mail, subject, content)) {
+    if (!name || !email || !subject || !message) {
+        return res.render('contact', {
+            message: "Kindly fill all the Details"
+        });
+    }
+    else if (sendMail(smtp_mail, subject, content)) {
         const sub = "Thanks For Contacting Us";
         const cont = "We have Received your mail, We will contact you ASAP!";
 
         if (sendMail(email, sub, cont)) {
             return res.render('contact', {
-                message: "Message sent Successfully"
+                success_message: "Message sent Successfully"
             });
         }
         else {
             return res.render('contact', {
-                err_message: "Unable to send Message"
+                message: "Unable to send Message"
             });
         }
     }
     else {
         return res.render('contact', {
-            err_message: "Unable to send Message"
+            message: "Unable to send Message"
         });
     }
 }

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/9f5e9c7e33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style/login.css">
-    <title>Login</title>
+    <title>Login - ParkNow</title>
 </head>
 
 <body>
@@ -49,22 +49,12 @@
             </div>
         </div>
         {{#if message}}
-        <div class="alert">
-            <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-            {{message}}
-        </div>
+        {{>alert}}
         {{/if}}
     </div>
 
     {{#if message}}
-    <script>
-        const closeButton = document.querySelector('.closebtn');
-        const alertDiv = closeButton.parentElement;
-
-        setTimeout(() => {
-            alertDiv.style.display = 'none'
-        }, 6000)
-    </script>
+    <script src="/script/alert.js"></script>
     {{/if}}
 </body>
 

@@ -140,7 +140,7 @@ body {
   text-decoration: none;
 }
 
-.alert {
+.success {
   width: 50%;
   position: relative;
   bottom: 9px;
@@ -148,6 +148,17 @@ body {
   margin: -34px;
   padding: 10px;
   background-color: #32cd32aa;
+  color: white;
+}
+
+.alert {
+  width: 50%;
+  position: relative;
+  bottom: 9px;
+  left: 50%;
+  margin: -34px;
+  padding: 10px;
+  background-color: #f44336cc;
   color: white;
 }
 

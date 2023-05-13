@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/style/navbar.css">
     <link rel="stylesheet" href="/style/footer.css">
     <link rel="stylesheet" href="/style/book.css">
-    <title>Book Now</title>
+    <title>Book your park - ParkNow</title>
 </head>
 
 <body>
@@ -110,26 +110,15 @@
             </form>
         </section>
         {{#if message}}
-        <div class="alert">
-            <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-            {{message}}
-        </div>
+        {{>alert}}
         {{/if}}
     </main>
 
     {{>footer}}
 
     {{#if message}}
-    <script>
-        const closeButton = document.querySelector('.closebtn');
-        const alertDiv = closeButton.parentElement;
-
-        setTimeout(() => {
-            alertDiv.style.display = 'none'
-        }, 6000)
-    </script>
+    <script src="/script/alert.js"></script>
     {{/if}}
-
     <script src="/script/book.js"></script>
     <script src="/script/navbar.js"></script>
 </body>

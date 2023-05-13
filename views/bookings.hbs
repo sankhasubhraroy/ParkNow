@@ -18,6 +18,20 @@
 
   <div class="main-container">
     <div class="container">
+      <div class="booking-info">
+        <div class="info">
+          <p>Upcoming Bookings</p>
+          <h3>{{bookingDetails.length}}</h3>
+        </div>
+        <div class="info">
+          <p>Expired Bookings</p>
+          <h3>{{expiredBookingDetails.length}}</h3>
+        </div>
+        <a class="info" href="/book">
+          <p>Wanna Book</p>
+          <h3>Book Now</h3>
+        </a>
+      </div>
       <ul class="responsive-table">
         <li class="table-header">
           <div class="col col-1">Booking Id</div>
@@ -61,6 +75,8 @@
   </div>
 
   {{>footer}}
+
+  <script src="/script/navbar.js"></script>
 
 </body>
 

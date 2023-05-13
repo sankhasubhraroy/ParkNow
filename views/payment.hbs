@@ -55,7 +55,7 @@
             "image": "https://i.ibb.co/7CPBGwk/Park-Now-Logo-2.png",
             "order_id": "{{orderId}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             "handler": function (response) {
-                window.location.href = "/account";
+                window.location.href = "/account/bookings";
                 fetch("/auth/book/verify", {
                     headers: {
                         'Accept': 'application/json',
@@ -64,6 +64,9 @@
                     method: "POST",
                     body: JSON.stringify({
                         id: "{{id}}",
+                        name: "{{name}}",
+                        email: "{{email}}",
+                        phoneNo: "{{phoneNo}}",
                         vehicleType: "{{vehicleType}}",
                         vehicleNo: "{{vehicleNo}}",
                         check_in: "{{check_in}}",

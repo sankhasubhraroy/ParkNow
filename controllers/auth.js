@@ -1,4 +1,5 @@
 const db = require("../config/database");
+const sendMail = require("../helpers/sendMail");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
@@ -316,7 +317,7 @@ exports.book = (req, res, next) => {
 
 exports.verify = (req, res) => {
 
-    const { id, vehicleType, vehicleNo, check_in, check_out, amount, razorpay_payment_id, razorpay_order_id, razorpay_signature } = req.body;
+    const { id, name, email, phoneNo, vehicleType, vehicleNo, check_in, check_out, amount, razorpay_payment_id, razorpay_order_id, razorpay_signature } = req.body;
     const key_secret = process.env.KEY_SECRET;
 
     const hmac = crypto.createHmac('sha256', key_secret);
@@ -329,7 +330,6 @@ exports.verify = (req, res) => {
 
         db.query('INSERT INTO bookings SET ?', { vehicle_type: vehicleType, vehicle_no: vehicleNo, check_in: check_in, check_out: check_out, id: id }, (err, result) => {
 
-            console.log(result.insertId);
             const booking_id = result.insertId;
 
             if (err) {
@@ -337,13 +337,26 @@ exports.verify = (req, res) => {
             }
             else {
                 db.query('INSERT INTO payments SET ?', { order_id: razorpay_order_id, payment_id: razorpay_payment_id, amount: amount, booking_id: booking_id, id: id }, (err, result) => {
+
                     if (err) {
                         console.log(err);
                     }
                     else {
-                        console.log("payment and booking successful");
+                        const sub = "Booking Confirmed!";
+                        const cont = `<p>Hey there, <b>${name}</b>!</p>
+                            <p>We are happy to inform you that your booking for <b>${vehicleType}</b> with Vehicle-No <b>${vehicleNo}</b> is confirmed!</p>
+                            <p><b>Booking-Id:</b> ${booking_id}</p>
+                            <p><b>Check-In:</b> ${check_in}</p>
+                            <p><b>Check-Out:</b> ${check_out}</p><br>
+                            <p>We can’t wait to see you!</p><br>
+                            <p><b>ParkNow</p>
+                            <p>sankha.roy.dev@gmail.com</p>
+                            <p>+91 86XXXXX147</p>
+                            <p>ParkNow Corporation Main Building, India</b></p>`
+
+                        sendMail(email, sub, cont);
                     }
-                })
+                });
             }
         });
     }
@@ -398,4 +411,34 @@ exports.generateInvoice = (req, res, next) => {
             return next();
         }
     });
+}
+
+exports.contact = (req, res) => {
+    const { name, email, subject, message } = req.body;
+
+    const smtp_mail = process.env.SMTP_MAIL;
+    const content = `<p><b>Name: </b>${name}</p><p>
+        <b>Email: </b>${email}</p>
+        <p><b>Message: </b>${message}</p>`
+
+    if (sendMail(smtp_mail, subject, content)) {
+        const sub = "Thanks For Contacting Us";
+        const cont = "We have Received your mail, We will contact you ASAP!";
+
+        if (sendMail(email, sub, cont)) {
+            return res.render('contact', {
+                message: "Message sent Successfully"
+            });
+        }
+        else {
+            return res.render('contact', {
+                err_message: "Unable to send Message"
+            });
+        }
+    }
+    else {
+        return res.render('contact', {
+            err_message: "Unable to send Message"
+        });
+    }
 }

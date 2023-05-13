@@ -16,26 +16,6 @@ body {
     background: #eeeaeb;
 }
 
-.main-container {
-    max-height: 100vh;
-}
-
-.back-btn {
-    background-color: #01d28c5c;
-    width: fit-content;
-    border-radius: 30px;
-    position: absolute;
-}
-
-.back-btn a {
-    text-decoration: none;
-    color: #f3f3f3;
-}
-
-.back-btn .fa {
-    padding: 5px 10px;
-}
-
 .upper-section {
     background: linear-gradient(180deg, #00d2ff 0%, #3a47d5 100%);
 }
@@ -223,6 +203,7 @@ body {
     }
 
     .welcome-message {
+        text-align: center;
         position: relative;
         top: 55px;
     }

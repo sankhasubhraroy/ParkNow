@@ -9,7 +9,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
   color: #333;
   background: #f3f3f3;
@@ -26,6 +26,39 @@ body {
   width: 1140px;
   margin: auto;
   padding: 30px;
+}
+
+.booking-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking-info a {
+  text-decoration: none;
+  transition: background-color 0.15s linear;
+}
+
+.booking-info a:hover {
+  background-color: #B0C4DE;
+}
+
+.booking-info .info {
+  width: 30%;
+  padding: 10px 30px;
+  margin-bottom: 40px;
+  background-color: #ADD8E6;
+  border-radius: 4px;
+}
+
+.booking-info .info p {
+  font-size: 16px;
+  color: #8d8d8d;
+}
+
+.booking-info .info h3 {
+  font-size: 22px;
+  color: #6c7ae0;
+  text-align: right;
 }
 
 .responsive-table li {
@@ -49,6 +82,7 @@ body {
 .responsive-table .table-row {
   background-color: #fff;
   font-family: 'Poppins', sans-serif;
+  font-size: 14px;
   box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
   transition: transform ease-out 0.3s;
 }
@@ -97,6 +131,15 @@ body {
 }
 
 @media all and (max-width: 767px) {
+  .booking-info {
+    flex-direction: column;
+  }
+
+  .booking-info .info {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
   .responsive-table .table-header {
     display: none;
   }

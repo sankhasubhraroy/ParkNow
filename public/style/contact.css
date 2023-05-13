@@ -33,6 +33,7 @@ body {
   border-top-left-radius: 7px;
   border-bottom-left-radius: 7px;
   background-color: #fff;
+  box-shadow: 0 4px 7px #33333350;
 }
 
 .info-box {
@@ -42,12 +43,14 @@ body {
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
   background-color: #720e9e;
+  box-shadow: -7px 0 7px #33333380;
   transform: scale(1.05);
-  transition: transform ease-out 0.3s;
+  transition: all ease-out 0.3s;
 }
 
 .info-box:hover {
   transform: scale(1);
+  box-shadow: 0 4px 7px #3333337f;
 }
 
 .contact-box h1 {
@@ -137,6 +140,34 @@ body {
   text-decoration: none;
 }
 
+.alert {
+  width: 50%;
+  position: relative;
+  bottom: 9px;
+  left: 50%;
+  margin: -34px;
+  padding: 10px;
+  background-color: #32cd32aa;
+  color: white;
+}
+
+.closebtn {
+  padding: 5px 7px;
+  margin-left: 10px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 15px;
+  cursor: pointer;
+  border-radius: 15px;
+  transition: background-color 0.3s linear;
+}
+
+.closebtn:hover {
+  background-color: #ffffff44;
+}
+
 @media screen and (max-width: 767px) {
   .row {
     flex-direction: column-reverse;
@@ -151,6 +182,7 @@ body {
     width: 100%;
     transform: scale(1);
     border-radius: 0;
+    box-shadow: 0 4px 7px #3333337f;
   }
 
   .name-group,
